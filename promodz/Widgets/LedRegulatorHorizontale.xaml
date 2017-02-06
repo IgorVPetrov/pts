@@ -1,0 +1,342 @@
+﻿<UserControl x:Class="promodz.Widgets.LedRegulatorHorizontale"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             xmlns:src="clr-namespace:promodz.Widgets.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="134" d:DesignWidth="536"
+             MaxWidth="536" MaxHeight="134" MinWidth="536" MinHeight="134"
+             Background="#536A87" >
+    <UserControl.Resources>
+
+        <SolidColorBrush x:Key="CheckBoxFillNormal" Color="#F4F4F4"/>
+        <SolidColorBrush x:Key="CheckBoxStroke" Color="#8E8F8F"/>
+        <Style x:Key="EmptyCheckBoxFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CheckRadioFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LedSwitchCheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="{StaticResource CheckBoxFillNormal}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyCheckBoxFocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent" SnapsToDevicePixels="true" HorizontalAlignment="Left" Width="21" Height="36" VerticalAlignment="Top">
+                            <BulletDecorator.Bullet>
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Canvas Width="21" Height="36" d:LayoutOverrides="TopMargin, BottomMargin"  >
+                                        <Path Fill="Black" Data="M0,25c0-.34,0-.67.05-1V10.57a10.57,10.57,0,1,1,21.14,0V24c0,.33.05.67.05,1A10.62,10.62,0,1,1,0,25Z" />
+                                        <Path x:Name="thumb" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1, AncestorType={x:Type UserControl}} , Path=Background}" Data="M0,0a6.89,6.89,0,1,1,0,0.1Z" Canvas.Left="3.5" Canvas.Top="24.95"  />
+                                    </Canvas>
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="CheckBox.Checked" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="thumb"
+                                            Storyboard.TargetProperty="(Canvas.Top)"
+                                            From="24.95" To="11" Duration="0:0:0.05" />
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="CheckBox.Unchecked" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="thumb"
+                                            Storyboard.TargetProperty="(Canvas.Top)"
+                                            From="11" To="24.95" Duration="0:0:0.05" />
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,0,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GridSplitterPreviewStyle">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Fill="#80000000"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GridSplitterStyle1" TargetType="{x:Type GridSplitter}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="PreviewStyle" Value="{StaticResource GridSplitterPreviewStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridSplitter}">
+                        <Grid Margin="0,0,0,0">
+
+                            <Path Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Path.Data>
+                                    <EllipseGeometry Center="3,3"
+                                                     RadiusX="3"
+                                                     RadiusY="3" 
+                                                     />
+
+                                </Path.Data>
+                            </Path>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <VisualBrush x:Key="PunctireBrush" Viewport="3,0,6,8" ViewportUnits="Absolute" TileMode="Tile">
+            <VisualBrush.Visual>
+                <Grid Width="6" Height="1" MinHeight="1" MinWidth="6" MaxHeight="1" MaxWidth="6" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3"/>
+                        <ColumnDefinition Width="3"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Rectangle Grid.Column="1" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <Style x:Key="SliderDecreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderIncreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+
+                        <Grid Width="21" Height="21">
+
+                            <Path Fill="Black" Data="M11,0A10.5,10.5,90,1,1,10,0zM11,3A7.5,7.5,-90,1,1,10,3z" />
+                            <Path Fill="Transparent" Data="M11,3A7.5,7.5,-90,1,1,10,3z" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="LedSlider" TargetType="{x:Type Slider}">
+            <Grid Background="{TemplateBinding Background}">
+                <TickBar 
+                        Name="TopTick"
+                        SnapsToDevicePixels="True" 
+                        Placement="Top"
+                        Fill="Black"
+                        Height="4"
+                        Visibility="Collapsed" />
+
+                <Track  Name="PART_Track" >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderDecreaseRepeatButtonStyle}"
+                                Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumbStyle}" />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderIncreaseRepeatButtonStyle}"
+                                Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <TickBar 
+                        Name="BottomTick"
+                        SnapsToDevicePixels="True" 
+                        Fill="{TemplateBinding Foreground}"
+                        Placement="Bottom"
+                        Height="4"
+                        Visibility="Collapsed" />
+            </Grid>
+            <ControlTemplate.Triggers>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+
+        <src:NormalizeConverter x:Key="nConv" Base="492" />
+        <src:LedRegulatotHorizontaleColorConverter  x:Key="colorConv" />
+        <SolidColorBrush x:Key="BlackBrush" Color="Black" />
+        <Style TargetType="{x:Type Path}" x:Key="lampColbStyle">
+            <Setter Property="Fill" Value="Black" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ledCheckBox,Path=IsChecked,Mode=OneWay}" Value="True" >
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="Yellow" Offset="0.0" />
+                                <GradientStop Color="Yellow" Offset="0.7" />
+                                <GradientStop Color="Black" Offset="0.71" />
+                                <GradientStop Color="Black" Offset="1" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Path}" x:Key="lampSpiralStyle">
+            <Setter Property="Fill" Value="Black" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ledCheckBox,Path=IsChecked,Mode=OneWay}" Value="True" >
+                    <Setter Property="Fill" Value="Yellow" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <Border BorderThickness="3" BorderBrush="#2C394F">
+        <Canvas >
+            <Grid Width="530" Height="79" Canvas.Top="49" Canvas.Left="0">
+                <Grid  HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                    <Grid    Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        <Path x:Name="gradient" SnapsToDevicePixels="True" HorizontalAlignment="Left" VerticalAlignment="Top" Data="M24.895844,49.833676 A24.5,24.5,0,0,1,24.937844,9.0477562E-06 L466.93784,9.0477562E-06 A24.5,24.5,0,0,1,466.97933,49.833667 z" Margin="0,1,0,0" Grid.ColumnSpan="2"   >
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#00ffde" Offset="0.0" />
+                                    <GradientStop Color="#3636ff" Offset="0.2" />
+                                    <GradientStop Color="#e91388" Offset="0.4" />
+                                    <GradientStop Color="#eb2d2e" Offset="0.6" />
+                                    <GradientStop Color="#fde92b" Offset="0.8" />
+                                    <GradientStop Color="#009e54" Offset="1" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+
+
+
+
+
+                        <Grid  x:Name="measureGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="37"/>
+                                <ColumnDefinition Width="0*"/>
+                                <ColumnDefinition Width="412*"/>
+                                <ColumnDefinition Width="0*"/>
+                                <ColumnDefinition Width="36"/>
+
+
+
+
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Grid.Column="0"  x:Name="sliderMinValue" StrokeThickness="1" VerticalAlignment="Top" Margin="0,25.416,0,0" Height="0" Grid.ColumnSpan="2"/>
+                            <Rectangle Grid.Column="0" x:Name="sliderMaxValue" StrokeThickness="1" VerticalAlignment="Top" Margin="0,25.416,0,0" Height="0" Grid.ColumnSpan="3" />
+                            <Rectangle Grid.Column="2" StrokeThickness="1"  Stroke="{StaticResource PunctireBrush}" Margin="-14,24.916,-14,24.918"   />
+
+                            <GridSplitter Grid.Column="2" x:Name="gridSplitterLeft" HorizontalAlignment="Left" Style="{StaticResource GridSplitterStyle1}" Visibility="Visible"  Margin="-17,0,0,0" Width="6"   />
+                            <GridSplitter Grid.Column="2" x:Name="gridSplitterRight" HorizontalAlignment="Right" Style="{StaticResource GridSplitterStyle1}" Visibility="Visible" Width="6" Margin="0,0,-16,0" />
+
+                            <Slider x:Name="slider" Foreground="{Binding ElementName=gradient,Path=Fill}" Minimum="{Binding ElementName=sliderMinValue, Converter={StaticResource nConv}, Path=ActualWidth}" Maximum="{Binding ElementName=sliderMaxValue,Converter={StaticResource nConv},Path=ActualWidth}" Grid.Column="2"  Template="{StaticResource LedSlider}" Margin="-11,14.916,-10,14.918"      />
+
+                        </Grid>
+
+
+
+
+
+                    </Grid>
+                    <Path VerticalAlignment="Top" SnapsToDevicePixels="True" Fill="Black" Data="M470.958,8.042 A20,20,0,0,1,470.99967,49.917 L28.98925,49.82325 A20,20,0,0,1,28.958002,8.042 L470.66634,8.042 M470.958,0.00033333333 L29.000096,1.669695E-10 A28.5,28.5,0,0,0,28.99991,58 L470.99967,57.958667 A28.5,28.5,0,0,0,470.958,0.00033333333 z"  Height="58" Margin="0,1,0,0"   />
+
+
+                </Grid>
+            </Grid>
+            <TextBlock x:Name="UserName" Canvas.Left="30.8" TextWrapping="Wrap" Text="RGB LED / deco" Canvas.Top="5.71" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="29"/>
+            <Grid Width="21" Height="21" Canvas.Right="47" Canvas.Top="9">
+
+                <Path Fill="Black" Data="M11,0A10.5,10.5,90,1,1,10,0zM11,3A7.5,7.5,-90,1,1,10,3z" />
+                <Path x:Name="currentColorView"  Data="M11,3A7.5,7.5,-90,1,1,10,3z" >
+                    <Path.Fill>
+                        <MultiBinding Converter="{StaticResource  colorConv}">
+                            <Binding ElementName="slider" Path="Value" Mode="OneWay"/>
+                            <Binding ElementName="gradient" Path="Fill" Mode="OneWay"/>
+                        </MultiBinding>
+
+                    </Path.Fill>
+                </Path>
+            </Grid>
+
+
+
+            <Grid Canvas.Left="15" Canvas.Top="12">
+                <Path x:Name="lampColb" Style="{DynamicResource lampColbStyle}"  Data="M12.92,6.46A6.46,6.46,0,0,0,0,6.46,7.39,7.39,0,0,0,1.87,11.4a5,5,0,0,1,1.38,3.31v2.71a2.83,2.83,0,0,0,2.83,2.84h.78a2.84,2.84,0,0,0,2.83-2.84V14.71a5,5,0,0,1,1.38-3.31A7.39,7.39,0,0,0,12.92,6.46ZM6.85,19H6.07a1.53,1.53,0,0,1-1.45-1H8.29A1.53,1.53,0,0,1,6.85,19ZM8.37,16.6H4.54V16H8.37Zm0-1.95H4.56a6.28,6.28,0,0,0-1.64-4,6.12,6.12,0,0,1-1.6-4.15,5.14,5.14,0,0,1,10.28,0A6.12,6.12,0,0,1,10,10.61,6.28,6.28,0,0,0,8.36,14.65Z"/>
+                <Path x:Name="lampSpiral" Style="{DynamicResource lampSpiralStyle}"   Data="M5.51,11.6a.66.66,0,0,0,.39-.84L4.48,6.83,5,6.07,6,7a.66.66,0,0,0,.89,0l1-1,.49.76L7,10.76a.66.66,0,1,0,1.24.45L9.79,7a.66.66,0,0,0-.06-.58L8.64,4.7a.66.66,0,0,0-1-.13L6.46,5.66,5.28,4.57a.66.66,0,0,0-1,.13L3.19,6.4A.66.66,0,0,0,3.13,7l1.54,4.23A.66.66,0,0,0,5.51,11.6Z"/>
+            </Grid>
+            <TextBlock x:Name="info" Canvas.Left="15" TextWrapping="Wrap" Text="SLIDE TO CHANGE HUE / DOUBLE TAP COLOR TO FIX" Canvas.Top="38.06" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58"/>
+
+            <Path Fill="Black" Canvas.Left="473" Canvas.Top="39">
+                <Path.Data>
+                    <EllipseGeometry Center="3,3" RadiusX="3" RadiusY="3" />
+                </Path.Data>
+            </Path>
+            <CheckBox x:Name="ledCheckBox" Style="{StaticResource LedSwitchCheckBoxStyle}" Content="CheckBox" Canvas.Left="497" Canvas.Top="9"/>
+            <TextBlock x:Name="textBlock1" Canvas.Left="406" TextWrapping="Wrap" Text="CURRENT STATE" Canvas.Top="14" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58"/>
+            <TextBlock x:Name="textBlock" Canvas.Left="444.129" TextWrapping="Wrap" Text="RANGE" Canvas.Top="38.06" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58"/>
+        </Canvas>
+    </Border>
+</UserControl>

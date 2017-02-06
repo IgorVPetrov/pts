@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="promodz.Widgets.ThermometerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             xmlns:src="clr-namespace:promodz.Widgets.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="35" d:DesignWidth="230"
+             MinHeight="35" MinWidth="230" MaxHeight="35" MaxWidth="230"
+             SnapsToDevicePixels="True"
+             Background="#536A87">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SliderDecreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RepeatButton}">
+                            <Border Background="Transparent" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderIncreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RepeatButton}">
+                            <Border Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+
+                            <Grid>
+
+                                <Path Fill="Transparent" Data="M0,0h10v2a2,2,0,0,1,0,4v2h-10Z" />
+                                <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" Data="M10,0v2a2,2,0,0,1,0,4v2h2v-8Z" />
+
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate x:Key="FanSlider" TargetType="{x:Type Slider}">
+                <Grid >
+                    <TickBar 
+                        Name="TopTick"
+                        SnapsToDevicePixels="True" 
+                        Placement="Top"
+                        Fill="Black"
+                        Height="4"
+                        Visibility="Collapsed" />
+
+                    <Track  Name="PART_Track">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton 
+                                Style="{StaticResource SliderDecreaseRepeatButtonStyle}"
+                                Command="Slider.DecreaseLarge" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource SliderThumbStyle}" />
+                        </Track.Thumb>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton 
+                                Style="{StaticResource SliderIncreaseRepeatButtonStyle}"
+                                Command="Slider.IncreaseLarge" />
+                        </Track.IncreaseRepeatButton>
+                    </Track>
+                    <TickBar 
+                        Name="BottomTick"
+                        SnapsToDevicePixels="True" 
+                        Fill="{TemplateBinding Foreground}"
+                        Placement="Bottom"
+                        Height="4"
+                        Visibility="Collapsed" />
+                </Grid>
+                <ControlTemplate.Triggers>
+
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <src:DoubleToIntStrConverter x:Key="dtiConv"  />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Canvas>
+        <Path SnapsToDevicePixels="True" Fill="Black" Data="M20.199587,19.740792 L190.80894,19.709565 A7.8,7.8,0,1,0,190.79025,3.7896245 L20.306068,3.7741903 A11.7,11.7,0,1,0,20.199587,19.740792 z M3.7404457,11.775295 A7.8,7.8,0,0,1,18.337318,7.7741912 L190.82169,7.8054404 A3.9,3.9,0,1,1,190.80607,15.742941 L18.321692,15.774191 A7.8,7.8,0,0,1,3.7404457,11.775295 z" Canvas.Top="11.226" Height="23.401" Width="198.76" Canvas.Left="0.116" />
+        <Path SnapsToDevicePixels="True" Data="M11.377449,7.9226223 A1.67,1.67,0,0,0,11.707449,7.9226223 L185.24307,7.9526568 A2,2,0,1,0,185.24307,3.9370319 L11.696199,3.9682473 11.383752,3.9530788 A5.85,5.85,0,1,0,11.321191,7.9214063 z" Canvas.Top="17.047" Height="11.701" Canvas.Left="5.773" Width="187.25" >
+            <Path.Fill>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                    <GradientStop Color="#ff98ff" Offset="0.0" />
+                    <GradientStop Color="#d9b8f9" Offset="0.2" />
+                    <GradientStop Color="#b3d6f4" Offset="0.44" />
+                    <GradientStop Color="#98edf0" Offset="0.66" />
+                    <GradientStop Color="#88faee" Offset="0.85" />
+                    <GradientStop Color="#82ffed" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <TextBlock  x:Name="Temperature"  SnapsToDevicePixels="True"  TextWrapping="Wrap" Text="{Binding ElementName=slider, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" Canvas.Top="13.184" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17" Canvas.Left="201.5">
+
+        </TextBlock>
+        <TextBlock x:Name="Number" Canvas.Right="194" TextWrapping="Wrap" Text="0." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17" Canvas.Top="-4"/>
+        <TextBlock x:Name="UserName" Canvas.Left="39" TextWrapping="Wrap" Text="Radiator" Canvas.Top="-4" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17"/>
+
+        <Slider x:Name="slider" Template="{StaticResource FanSlider}" Canvas.Left="18.125" Canvas.Top="19.015" Height="8" Width="175" SmallChange="1" Maximum="100" Value="101" />
+
+
+    </Canvas>
+</UserControl>

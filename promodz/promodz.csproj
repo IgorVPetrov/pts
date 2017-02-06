@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EECD30B7-35D9-4EFF-94E2-843D93D0AC03}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>promodz</RootNamespace>
+    <AssemblyName>promodz</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Hardware\CommandTransmitter.cs" />
+    <Compile Include="Hardware\ICommand.cs" />
+    <Compile Include="Hardware\IMessage.cs" />
+    <Compile Include="Hardware\IProModzHardwareConnection.cs" />
+    <Compile Include="Hardware\PacketReceivedEventArgs.cs" />
+    <Compile Include="Hardware\PacketReceivedEventHandler.cs" />
+    <Compile Include="Hardware\MessageReceiver.cs" />
+    <Compile Include="Hardware\ProModzHardware.cs" />
+    <Compile Include="Hardware\SerialPortConnection.cs" />
+    <Compile Include="Hardware\Win32HardwareIOSupport.cs" />
+    <Compile Include="Serial\CRC16.cs" />
+    <Compile Include="Serial\SfCodec.cs" />
+    <Compile Include="Serial\SfCodecException.cs" />
+    <Compile Include="Widgets\Converters\DoubleToIntStrConverter.cs" />
+    <Compile Include="Widgets\Converters\LedRegulatotHorizontaleColorConverter.cs" />
+    <Compile Include="Widgets\Converters\NormalizeConverter.cs" />
+    <Compile Include="Widgets\FanControl.xaml.cs">
+      <DependentUpon>FanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\FanPumpGraph.xaml.cs">
+      <DependentUpon>FanPumpGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\FourFanControlsPanel.xaml.cs">
+      <DependentUpon>FourFanControlsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Prototype\fw-1.xaml.cs">
+      <DependentUpon>fw-1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Prototype\fw-2.xaml.cs">
+      <DependentUpon>fw-2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Prototype\fw-3.xaml.cs">
+      <DependentUpon>fw-3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Graph24Radial.xaml.cs">
+      <DependentUpon>Graph24Radial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Graph24RadialAndSixThermometers.xaml.cs">
+      <DependentUpon>Graph24RadialAndSixThermometers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\GraphBigHorizotal.xaml.cs">
+      <DependentUpon>GraphBigHorizotal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\GraphBigVertical.xaml.cs">
+      <DependentUpon>GraphBigVertical.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\LedControl.xaml.cs">
+      <DependentUpon>LedControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\LedRegulatorCircle.xaml.cs">
+      <DependentUpon>LedRegulatorCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\LedRegulatorHorizontale.xaml.cs">
+      <DependentUpon>LedRegulatorHorizontale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\LedSwitch.xaml.cs">
+      <DependentUpon>LedSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Lock.xaml.cs">
+      <DependentUpon>Lock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\ProcessorTemperatureView.xaml.cs">
+      <DependentUpon>ProcessorTemperatureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Prototype\fw-4.xaml.cs">
+      <DependentUpon>fw-4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\PumpSpeed.xaml.cs">
+      <DependentUpon>PumpSpeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SimpleFan.xaml.cs">
+      <DependentUpon>SimpleFan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SmallLiqLevelView.xaml.cs">
+      <DependentUpon>SmallLiqLevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SmallProcessorTemperatureView.xaml.cs">
+      <DependentUpon>SmallProcessorTemperatureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SmallVCardTempetratureView.xaml.cs">
+      <DependentUpon>SmallVCardTempetratureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\TwelveVerticalTemperatureViewsAndFanControlsPanel.xaml.cs">
+      <DependentUpon>TwelveVerticalTemperatureViewsAndFanControlsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\TwoFansAndGraph.xaml.cs">
+      <DependentUpon>TwoFansAndGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\TwoPumpAndGraph.xaml.cs">
+      <DependentUpon>TwoPumpAndGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\VCardTemperatureView.xaml.cs">
+      <DependentUpon>VCardTemperatureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\VerticalFanControl.xaml.cs">
+      <DependentUpon>VerticalFanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\FanSpeed.xaml.cs">
+      <DependentUpon>FanSpeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\FlowSpeed.xaml.cs">
+      <DependentUpon>FlowSpeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\NarrowFanControl.xaml.cs">
+      <DependentUpon>NarrowFanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\PumpControl.xaml.cs">
+      <DependentUpon>PumpControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SixNarrowFanControlsPanel.xaml.cs">
+      <DependentUpon>SixNarrowFanControlsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\SixThermometerViewsPanel.xaml.cs">
+      <DependentUpon>SixThermometerViewsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Temperature.xaml.cs">
+      <DependentUpon>Temperature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\ThermometerView.xaml.cs">
+      <DependentUpon>ThermometerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\VerticalLargeThermometerView.xaml.cs">
+      <DependentUpon>VerticalLargeThermometerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\VerticalThermometerViev.xaml.cs">
+      <DependentUpon>VerticalThermometerViev.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Widgets\FanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\FanPumpGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\FourFanControlsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Prototype\cm-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\cm-2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\cm-3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\cm-4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\cm-5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\fw-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\fw-2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\fw-3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Graph24Radial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Graph24RadialAndSixThermometers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\GraphBigHorizotal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\GraphBigVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\LedControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\LedRegulatorCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\LedRegulatorHorizontale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\LedSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Lock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\ProcessorTemperatureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Prototype\fw-4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\fw-5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\mm-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\mm-2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\mm-3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\mm-4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\mm-5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\x3-1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Prototype\x3-2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\PumpSpeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Resources\ContextMenuDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SimpleFan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SmallLiqLevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SmallProcessorTemperatureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SmallVCardTempetratureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\TwelveVerticalTemperatureViewsAndFanControlsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\TwoFansAndGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\TwoPumpAndGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\VCardTemperatureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\VerticalFanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Widgets\FanSpeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\FlowSpeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\NarrowFanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\PumpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SixNarrowFanControlsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SixThermometerViewsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Temperature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\Templates\shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Templates\slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\ThermometerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\VerticalLargeThermometerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\VerticalThermometerViev.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\MyriadPro-Light.otf" />
+    <Resource Include="Fonts\MyriadPro-Regular.otf" />
+    <Resource Include="Fonts\MyriadPro-Bold.otf" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

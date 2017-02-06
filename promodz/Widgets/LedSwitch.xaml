@@ -1,0 +1,93 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="promodz.Widgets.LedSwitch"
+             mc:Ignorable="d"
+    
+             d:DesignHeight="36" d:DesignWidth="21"
+             MinHeight="36" MaxHeight="36" MinWidth="21" MaxWidth="21">
+    
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CheckBoxFillNormal" Color="#F4F4F4"/>
+        <SolidColorBrush x:Key="CheckBoxStroke" Color="#8E8F8F"/>
+        <Style x:Key="EmptyCheckBoxFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CheckRadioFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LedSwitchCheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="{StaticResource CheckBoxFillNormal}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyCheckBoxFocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent" SnapsToDevicePixels="true" HorizontalAlignment="Left" Width="21" Height="36" VerticalAlignment="Top">
+                            <BulletDecorator.Bullet>
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Canvas Width="21" Height="36" d:LayoutOverrides="TopMargin, BottomMargin"  >
+                                    <Path Fill="Black" Data="M0,25c0-.34,0-.67.05-1V10.57a10.57,10.57,0,1,1,21.14,0V24c0,.33.05.67.05,1A10.62,10.62,0,1,1,0,25Z" />
+                                        <Path x:Name="thumb" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=2, AncestorType={x:Type UserControl}} , Path=Background}" Data="M0,0a6.89,6.89,0,1,1,0,0.1Z" Canvas.Left="3.5" Canvas.Top="24.95"  />
+                                </Canvas>
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="CheckBox.Checked" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="thumb"
+                                            Storyboard.TargetProperty="(Canvas.Top)"
+                                            From="24.95" To="11" Duration="0:0:0.05" />
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="CheckBox.Unchecked" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetName="thumb"
+                                            Storyboard.TargetProperty="(Canvas.Top)"
+                                            From="11" To="24.95" Duration="0:0:0.05" />
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,0,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <CheckBox x:Name="ledSwitch" Content="" Style="{DynamicResource LedSwitchCheckBoxStyle}" />
+    </Grid>
+</UserControl>

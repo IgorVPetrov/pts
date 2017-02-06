@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="promodz.Widgets.FanControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             Height="45" Width="236" 
+             Background="#536A87" Loaded="UserControl_Loaded"
+             MinHeight="45" MaxHeight="45" MinWidth="236" MaxWidth="236">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SliderDecreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RepeatButton}">
+                            <Border Background="Transparent" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderIncreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RepeatButton}">
+                            <Border Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+
+                            <Grid>
+
+                                <Path   Fill="Transparent" Data="M0,0h10v1a2,2,0,0,1,0,4v1h-10Z" />
+                                <Path   Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" Data="M10,0v1a2,2,0,0,1,0,4v1h2v-6Z" />
+
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate x:Key="FanSlider" TargetType="{x:Type Slider}">
+                <Grid Background="{TemplateBinding Background}">
+                    <TickBar 
+                        Name="TopTick"
+                        SnapsToDevicePixels="True" 
+                        Placement="Top"
+                        Fill="Black"
+                        Height="4"
+                        Visibility="Collapsed" />
+
+                    <Track  Name="PART_Track" >
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton 
+                                Style="{StaticResource SliderDecreaseRepeatButtonStyle}"
+                                Command="Slider.DecreaseLarge" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource SliderThumbStyle}" />
+                        </Track.Thumb>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton 
+                                Style="{StaticResource SliderIncreaseRepeatButtonStyle}"
+                                Command="Slider.IncreaseLarge" />
+                        </Track.IncreaseRepeatButton>
+                    </Track>
+                    <TickBar 
+                        Name="BottomTick"
+                        SnapsToDevicePixels="True" 
+                        Fill="{TemplateBinding Foreground}"
+                        Placement="Bottom"
+                        Height="4"
+                        Visibility="Collapsed" />
+                </Grid>
+                <ControlTemplate.Triggers>
+
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Canvas x:Name="MainCanvas"   >
+        <Path  Fill="Black" Data="M227.55,14.4H43.11C39.95,5.4,31.81,0,22.26,0a22.34,22.34,0,0,0,0,44.69A22.77,22.77,0,0,0,43.11,30.4H227.55a8,8,0,0,0,0-16Zm0,12H40.41c-.29,1-.75,2.1-1.32,4.1A19,19,0,0,1,22.26,41.07a18.61,18.61,0,0,1,0-37.23A19.09,19.09,0,0,1,39.09,14.49a9.51,9.51,0,0,1,1.32,3.9H227.55a4,4,0,0,1,0,8Z" Canvas.Top="0.593" />
+        <Path   Data="M227.86,20.4H38.2A15.51,15.51,0,0,0,22.59,6.65a15.75,15.75,0,0,0,0,31.51A15.53,15.53,0,0,0,38.2,24.4H227.86a2,2,0,0,0,0-4Z" Canvas.Top="0.593" Canvas.Left="-0.002" >
+            <Path.Fill>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                    <GradientStop Color="Blue" Offset="0.0" />
+                    <GradientStop Color="#1f3dfb" Offset="0.16" />
+                    <GradientStop Color="#3d77f7" Offset="0.32" />
+                    <GradientStop Color="#56a8f3" Offset="0.49" />
+                    <GradientStop Color="#69cef0" Offset="0.64" />
+                    <GradientStop Color="#77e9ef" Offset="0.78" />
+                    <GradientStop Color="#7ff9ed" Offset="0.9" />
+                    <GradientStop Color="#82ffed" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <Path x:Name="fan"   Fill="Black" Data="M26.28,20.3a17.17,17.17,0,0,1,7.35-1.1,52,52,0,0,1-3.88-5,21.75,21.75,0,0,0-5.38,4.2,4.56,4.56,0,0,0-2-.53A17,17,0,0,1,25.11,11H19.37a18,18,0,0,0,.43,7.6A4.6,4.6,0,0,0,18.35,20a21.15,21.15,0,0,1-4.6-4.8,9.34,9.34,0,0,1-2.89,4,18.22,18.22,0,0,0,6.81,3.44,4.55,4.55,0,0,0,.54,2,17.18,17.18,0,0,1-7.35,1.1,52.59,52.59,0,0,1,3.88,5,21.75,21.75,0,0,0,5.38-4.2,4.56,4.56,0,0,0,2,.53,17,17,0,0,1-2.72,6.91h5.74a18,18,0,0,0-.44-7.6,4.6,4.6,0,0,0,1.46-1.47,21.12,21.12,0,0,1,4.6,4.8,9.32,9.32,0,0,1,2.89-4,18.23,18.23,0,0,0-6.81-3.44A4.57,4.57,0,0,0,26.28,20.3Zm-4,3.59a1.44,1.44,0,1,1,1.44-1.44A1.44,1.44,0,0,1,22.24,23.89Z" >
+            
+            <Path.RenderTransform>
+                <RotateTransform x:Name="fanRotateTransform"
+                                 CenterX="22.3"
+                                 CenterY="22.4" />
+            </Path.RenderTransform>
+            <!--
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Path.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="fanRotate"
+                                             Storyboard.TargetProperty="Angle"
+                                             From="40" To="400" Duration="0:0:1"
+                                             RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Path.Triggers>
+            -->
+        </Path>
+        <TextBlock x:Name="Speed" Canvas.Right="30" TextWrapping="Wrap" Text="" Canvas.Top="31.646" HorizontalAlignment="Right" FontFamily="../Fonts/#Myriad Pro" FontSize="14"  />
+        <TextBlock x:Name="textBlock" Canvas.Left="209.93" TextWrapping="Wrap" Text="RPM" Canvas.Top="31.646" FontFamily="../Fonts/#Myriad Pro" FontSize="14" Height="13.044" />
+        <Slider x:Name="slider"  Template="{StaticResource FanSlider}" Canvas.Left="40" Canvas.Top="20" Width="190" Height="6" SmallChange="1" ValueChanged="slider_ValueChanged" Maximum="4000" />
+        <TextBlock x:Name="SystemName" Canvas.Left="44.5" TextWrapping="Wrap" Text="FAN 01:" FontFamily="../Fonts/#Myriad Pro" FontSize="14" Canvas.Top="-2.5"/>
+        <TextBlock x:Name="UserName" Canvas.Left="94" TextWrapping="Wrap" Text="CHASSIS" Canvas.Top="-2.5" FontFamily="../Fonts/#Myriad Pro Light" FontSize="14"/>
+        
+
+
+
+    </Canvas>
+</UserControl>
+
+
+
+

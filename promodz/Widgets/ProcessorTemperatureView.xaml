@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="promodz.Widgets.ProcessorTemperatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="134" d:DesignWidth="268"
+             MinHeight="134" MaxHeight="134" MinWidth="268" MaxWidth="268"
+             Background="#536A87" 
+             SnapsToDevicePixels="True">
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Canvas>
+
+            <Canvas Width="30" Height="30" Canvas.Left="22.8" Canvas.Top="7.7">
+                <Path  Fill="Black" Data="M18,27.75a1.49,1.49,0,1,0,3,0V25.34H18v2.41Z"/>
+                <Path  Fill="Black" Data="M18,1.49V3.9h3V1.49a1.49,1.49,0,1,0-3,0Z"/>
+                <Path  Fill="Black" Data="M13.13,1.49V3.9h3V1.49a1.49,1.49,0,0,0-3,0Z"/>
+                <Path  Fill="Black" Data="M13.13,27.75a1.49,1.49,0,1,0,3,0V25.34h-3Z"/>
+                <Path  Fill="Black" Data="M8.29,1.49V3.9h3V1.49a1.49,1.49,0,1,0-3,0Z"/>
+                <Path  Fill="Black" Data="M8.29,27.75a1.49,1.49,0,1,0,3,0V25.34h-3Z"/>
+                <Path  Fill="Black" Data="M0,19.46a1.49,1.49,0,0,0,1.49,1.49H3.9V18H1.49A1.49,1.49,0,0,0,0,19.46Z"/>
+                <Path  Fill="Black" Data="M27.75,18H25.34v3h2.41a1.49,1.49,0,1,0,0-3Z"/>
+                <Path  Fill="Black" Data="M0,14.62a1.49,1.49,0,0,0,1.49,1.49H3.9v-3H1.49A1.49,1.49,0,0,0,0,14.62Z"/>
+                <Path  Fill="Black" Data="M27.75,13.13H25.34v3h2.41a1.49,1.49,0,1,0,0-3Z"/>
+                <Path  Fill="Black" Data="M0,9.78a1.49,1.49,0,0,0,1.49,1.49H3.9v-3H1.49A1.49,1.49,0,0,0,0,9.78Z"/>
+                <Path  Fill="Black" Data="M27.75,8.29H25.34v3h2.41a1.49,1.49,0,1,0,0-3Z"/>
+                <Path Fill="Black" Data="M5.33,22.36a1.55,1.55,0,0,0,1.55,1.55H22.36a1.55,1.55,0,0,0,1.55-1.55V6.88a1.55,1.55,0,0,0-1.55-1.55H6.88A1.55,1.55,0,0,0,5.33,6.88Z"/>
+            </Canvas>
+            <TextBlock x:Name="ProcessorName" Text="INTEL i7 8-CORE CPU" Canvas.Left="24.6" TextWrapping="Wrap" Canvas.Top="41.65" FontFamily="../Fonts/#Myriad Pro Light" FontSize="18"/>
+            <TextBlock x:Name="Temperature" Canvas.Right="127.5" TextAlignment="Right" TextWrapping="Wrap" Text="888" Canvas.Top="51.25" FontFamily="../Fonts/#Myriad Pro" FontWeight="Bold" FontSize="64"   RenderTransformOrigin="0.5,0.5">
+                <TextBlock.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.08"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
+            <TextBlock x:Name="Number" Canvas.Right="144.2" TextAlignment="Right" TextWrapping="Wrap" Text="01" Canvas.Top="4.6" FontFamily="../Fonts/#Myriad Pro" FontSize="32"/>
+            <TextBlock x:Name="textBlock" Canvas.Left="144.632" TextWrapping="Wrap" Text="°C" Canvas.Top="7.346" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="29"/>
+            <local:VerticalLargeThermometerView Canvas.Left="199" Canvas.Top="12"/>
+            <Polygon Fill="Black" Points="0 16.29 6.05 16.29 6.05 39.75 12.76 39.75 12.76 16.29 18.81 16.29 9.4 0 0 16.29" Canvas.Left="233.3" Canvas.Top="29" />
+
+
+        </Canvas>
+
+    </Border>
+</UserControl>

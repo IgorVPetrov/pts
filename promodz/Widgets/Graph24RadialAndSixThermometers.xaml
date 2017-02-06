@@ -1,0 +1,260 @@
+﻿<UserControl x:Class="promodz.Widgets.Graph24RadialAndSixThermometers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             xmlns:src="clr-namespace:promodz.Widgets.Converters"
+             mc:Ignorable="d" 
+             MaxHeight="536" MinHeight="536" Height="536"
+             MaxWidth="268" MinWidth="268" Width="268"
+             Background="#536A87"
+             >
+    <UserControl.Resources>
+
+        <LinearGradientBrush x:Key="HgBrush" EndPoint="0,0.5" StartPoint="1,0.5">
+            <GradientStop Color="#FFFF97FF" Offset="0"/>
+            <GradientStop Color="#FFCDD3F6" Offset="0.27"/>
+            <GradientStop Color="#FF82FFEC" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="SliderDecreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderIncreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+
+                        <Grid>
+
+                            <Path Fill="Transparent" Data="M0,0h10v2a2,2,0,0,1,0,4v2h-10Z" />
+                            <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" Data="M10,0v2a2,2,0,0,1,0,4v2h2v-8Z" />
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="TempSlider" TargetType="{x:Type Slider}">
+            <Grid >
+                <TickBar 
+                        Name="TopTick"
+                        SnapsToDevicePixels="True" 
+                        Placement="Top"
+                        Fill="Black"
+                        Height="4"
+                        Visibility="Collapsed" />
+
+                <Track  Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderDecreaseRepeatButtonStyle}"
+                                Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumbStyle}" />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderIncreaseRepeatButtonStyle}"
+                                Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <TickBar 
+                        Name="BottomTick"
+                        SnapsToDevicePixels="True" 
+                        Fill="{TemplateBinding Foreground}"
+                        Placement="Bottom"
+                        Height="4"
+                        Visibility="Collapsed" />
+            </Grid>
+            <ControlTemplate.Triggers>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <src:DoubleToIntStrConverter x:Key="dtiConv"  />
+
+
+    </UserControl.Resources>
+
+    <Border BorderThickness="3" BorderBrush="#2C394F">
+        <Canvas x:Name="canvas" Margin="0.047,-0.812,-0.047,0.812">
+            <!--
+            <Canvas Canvas.Top="14.871" Canvas.Left="19.046">
+                <Path Data="F1M2.109,0.75L2.109,3.25 0,3.25 0,5.125 2.109,5.125 2.109,12.484C2.109,14.078 2.39,15.281 3.062,16.047 3.64,16.687 4.562,17.078 5.718,17.078 6.671,17.078 7.421,16.906 7.906,16.734L7.781,14.859C7.421,14.984 7.031,15.031 6.359,15.031 4.984,15.031 4.515,14.078 4.515,12.406L4.515,5.125 8.046,5.125 8.046,3.25 4.515,3.25 4.515,0 2.109,0.75" Fill="Black" Height="17.078" Canvas.Left="187.348" Canvas.Top="2.391" Width="8.047"/>
+                <Path Data="F1M3.719,0C1.656,0 0,1.625 0,3.766 0,5.719 1.484,7.375 3.672,7.375 5.594,7.375 7.422,5.891 7.422,3.641 7.422,1.75 6.047,0 3.75,0L3.719,0 M3.703,1.328C5.297,1.328 5.906,2.641 5.906,3.672 5.906,5.047 4.984,6.063 3.703,6.063 2.438,6.063 1.516,5.047 1.516,3.766 1.516,2.578 2.234,1.328 3.672,1.328L3.703,1.328" Fill="Black" Height="7.375" Canvas.Left="203.402" Canvas.Top="0" Width="7.422"/>
+                <Path Data="F1M13.797,16.578C12.813,17.063 11.297,17.36 9.797,17.36 5.235,17.36 2.563,14.422 2.563,9.797 2.563,4.875 5.516,2.047 9.938,2.047 11.5,2.047 12.813,2.391 13.719,2.828L14.328,0.813C13.688,0.516 12.172,0 9.844,0 4,0 0,3.985 0,9.891 0,16.078 3.969,19.438 9.282,19.438 11.578,19.438 13.407,18.985 14.266,18.547L13.797,16.578" Fill="Black" Height="19.438" Canvas.Left="212.824" Canvas.Top="0.031" Width="14.328"/>
+                <Path Data="F1M5.75,18.875L8.203,18.875 8.203,2.078 13.968,2.078 13.968,0 0,0 0,2.078 5.75,2.078 5.75,18.875" Fill="Black" Height="18.875" Canvas.Left="0" Canvas.Top="0.313" Width="13.969"/>
+                <Path Data="F1M11.875,7.531C11.922,7.25 11.954,6.891 11.954,6.391 11.954,3.891 10.813,0 6.391,0 2.438,0 0,3.219 0,7.313 0,11.375 2.516,14.141 6.672,14.141 8.829,14.141 10.329,13.656 11.204,13.266L10.75,11.5C9.86,11.906 8.766,12.203 7,12.203 4.532,12.203 2.438,10.828 2.375,7.531L11.875,7.531 M2.407,5.766C2.61,4.063 3.672,1.766 6.188,1.766 8.938,1.766 9.61,4.203 9.579,5.766L2.407,5.766" Fill="Black" Height="14.141" Canvas.Left="13.443" Canvas.Top="5.328" Width="11.953"/>
+                <Path Data="F1M0.109,13.86L2.515,13.86 2.515,5.688C2.515,5.266 2.578,4.844 2.703,4.485 3.109,3.25 4.25,2.016 5.765,2.016 7.64,2.016 8.594,3.563 8.594,5.719L8.594,13.86 11,13.86 11,5.453C11,5.047 11.078,4.594 11.187,4.235 11.64,3.047 12.703,2.016 14.14,2.016 16.094,2.016 17.078,3.563 17.078,6.188L17.078,13.86 19.484,13.86 19.484,5.875C19.484,1.172 16.828,0 15,0 13.719,0 12.844,0.328 12.031,0.953 11.469,1.375 10.922,1.938 10.5,2.719L10.437,2.719C9.844,1.125 8.453,0 6.625,0 4.359,0 3.109,1.203 2.344,2.485L2.265,2.485 2.156,0.313 0,0.313C0.047,1.422,0.109,2.547,0.109,3.969L0.109,13.86" Fill="Black" Height="13.859" Canvas.Left="28.843" Canvas.Top="5.328" Width="19.484"/>
+                <Path Data="F1M0.11,19.406L2.578,19.406 2.578,12.047 2.625,12.047C3.438,13.391 4.985,14.172 6.797,14.172 9.969,14.172 12.953,11.766 12.953,6.891 12.953,2.766 10.5,0 7.188,0 5,0 3.375,0.953 2.406,2.625L2.344,2.625 2.203,0.313 0,0.313C0.078,1.594,0.11,3,0.11,4.735L0.11,19.406 M2.578,5.985C2.578,5.688 2.656,5.313 2.703,5.016 3.188,3.141 4.781,1.953 6.469,1.953 9.063,1.953 10.469,4.281 10.469,7 10.469,10.11 8.953,12.235 6.344,12.235 4.61,12.235 3.11,11.063 2.688,9.344 2.594,9.047 2.578,8.672 2.578,8.344L2.578,5.985" Fill="Black" Height="19.406" Canvas.Left="53.021" Canvas.Top="5.328" Width="12.953"/>
+                <Path Data="F1M11.875,7.531C11.922,7.25 11.953,6.891 11.953,6.391 11.953,3.891 10.812,0 6.391,0 2.437,0 0,3.219 0,7.313 0,11.375 2.516,14.141 6.672,14.141 8.828,14.141 10.328,13.656 11.203,13.266L10.75,11.5C9.859,11.906 8.766,12.203 7,12.203 4.531,12.203 2.437,10.828 2.375,7.531L11.875,7.531 M2.406,5.766C2.609,4.063 3.672,1.766 6.187,1.766 8.937,1.766 9.609,4.203 9.578,5.766L2.406,5.766" Fill="Black" Height="14.141" Canvas.Left="68.642" Canvas.Top="5.328" Width="11.953"/>
+                <Path Data="F1M0.11,13.86L2.578,13.86 2.578,6.61C2.578,6.219 2.594,5.828 2.657,5.453 2.985,3.641 4.219,2.328 5.953,2.328 6.297,2.328 6.547,2.344 6.797,2.375L6.797,0.063C6.578,0.031 6.375,0 6.125,0 4.469,0 2.969,1.141 2.344,2.969L2.266,2.969 2.157,0.313 0,0.313C0.078,1.563,0.11,2.938,0.11,4.531L0.11,13.86" Fill="Black" Height="13.859" Canvas.Left="84.041" Canvas.Top="5.328" Width="6.797"/>
+                <Path Data="F1M10.61,5.547C10.61,2.828 9.594,0 5.422,0 3.719,0 2.063,0.469 0.953,1.172L1.5,2.828C2.453,2.188 3.782,1.813 5.063,1.813 7.828,1.797 8.141,3.828 8.141,4.953L8.141,5.235C2.907,5.203 0,7 0,10.281 0,12.235 1.391,14.172 4.141,14.172 6.078,14.172 7.563,13.219 8.282,12.156L8.375,12.156 8.594,13.86 10.797,13.86C10.657,12.938,10.61,11.781,10.61,10.61L10.61,5.547 M8.203,9.297C8.203,9.547 8.172,9.828 8.094,10.078 7.703,11.235 6.547,12.344 4.75,12.344 3.532,12.344 2.453,11.625 2.453,10 2.453,7.36 5.516,6.891 8.203,6.938L8.203,9.297" Fill="Black" Height="14.172" Canvas.Left="92.423" Canvas.Top="5.328" Width="10.797"/>
+                <Path Data="F1M2.11,0.75L2.11,3.25 0,3.25 0,5.125 2.11,5.125 2.11,12.484C2.11,14.078 2.391,15.281 3.063,16.047 3.641,16.687 4.563,17.078 5.719,17.078 6.672,17.078 7.422,16.906 7.907,16.734L7.782,14.859C7.422,14.984 7.032,15.031 6.36,15.031 4.985,15.031 4.516,14.078 4.516,12.406L4.516,5.125 8.047,5.125 8.047,3.25 4.516,3.25 4.516,0 2.11,0.75" Fill="Black" Height="17.078" Canvas.Left="105.796" Canvas.Top="2.391" Width="8.047"/>
+                <Path Data="F1M11.437,0L8.968,0 8.968,8.281C8.968,8.765 8.89,9.203 8.75,9.547 8.296,10.656 7.14,11.812 5.5,11.812 3.281,11.812 2.468,10.047 2.468,7.468L2.468,0 0,0 0,7.922C0,12.656 2.562,13.859 4.687,13.859 7.093,13.859 8.546,12.422 9.156,11.328L9.218,11.328 9.359,13.547 11.546,13.547C11.453,12.484,11.437,11.25,11.437,9.828L11.437,0" Fill="Black" Height="13.859" Canvas.Left="116.846" Canvas.Top="5.641" Width="11.547"/>
+                <Path Data="F1M0.109,13.86L2.578,13.86 2.578,6.61C2.578,6.219 2.594,5.828 2.656,5.453 2.984,3.641 4.219,2.328 5.953,2.328 6.297,2.328 6.547,2.344 6.797,2.375L6.797,0.063C6.578,0.031 6.375,0 6.125,0 4.469,0 2.969,1.141 2.344,2.969L2.265,2.969 2.156,0.313 0,0.313C0.078,1.563,0.109,2.938,0.109,4.531L0.109,13.86" Fill="Black" Height="13.859" Canvas.Left="132.804" Canvas.Top="5.328" Width="6.797"/>
+                <Path Data="F1M11.875,7.531C11.922,7.25 11.953,6.891 11.953,6.391 11.953,3.891 10.812,0 6.391,0 2.437,0 0,3.219 0,7.313 0,11.375 2.516,14.141 6.672,14.141 8.828,14.141 10.328,13.656 11.203,13.266L10.75,11.5C9.859,11.906 8.766,12.203 7,12.203 4.531,12.203 2.437,10.828 2.375,7.531L11.875,7.531 M2.406,5.766C2.609,4.063 3.672,1.766 6.187,1.766 8.937,1.766 9.609,4.203 9.578,5.766L2.406,5.766" Fill="Black" Height="14.141" Canvas.Left="141.119" Canvas.Top="5.328" Width="11.953"/>
+                <Path Data="F1M0,13.188C0.953,13.75 2.312,14.141 3.797,14.141 6.969,14.141 8.844,12.453 8.844,10.047 8.844,8.031 7.609,6.86 5.281,5.985 3.516,5.297 2.734,4.781 2.734,3.672 2.734,2.656 3.516,1.813 4.984,1.813 6.234,1.813 7.219,2.297 7.75,2.61L8.344,0.844C7.609,0.36 6.406,0 5.031,0 2.156,0 0.359,1.797 0.359,3.969 0.359,5.578 1.5,6.922 3.969,7.813 5.766,8.485 6.469,9.094 6.469,10.281 6.469,11.422 5.625,12.297 3.859,12.297 2.625,12.297 1.344,11.781 0.578,11.344L0,13.188" Fill="Black" Height="14.141" Canvas.Left="1.156" Canvas.Top="27.332" Width="8.844"/>
+                <Path Data="F1M11.875,7.531C11.922,7.25 11.953,6.891 11.953,6.391 11.953,3.891 10.812,0 6.39,0 2.437,0 0,3.219 0,7.313 0,11.375 2.515,14.141 6.672,14.141 8.828,14.141 10.328,13.656 11.203,13.266L10.75,11.5C9.859,11.906 8.765,12.203 7,12.203 4.531,12.203 2.437,10.828 2.375,7.531L11.875,7.531 M2.406,5.766C2.609,4.063 3.672,1.766 6.187,1.766 8.937,1.766 9.609,4.203 9.578,5.766L2.406,5.766" Fill="Black" Height="14.141" Canvas.Left="12.574" Canvas.Top="27.332" Width="11.953"/>
+                <Path Data="F1M0.11,13.86L2.578,13.86 2.578,5.688C2.578,5.297 2.625,4.844 2.735,4.531 3.188,3.156 4.453,2.016 6.047,2.016 8.36,2.016 9.172,3.86 9.172,6.047L9.172,13.86 11.641,13.86 11.641,5.766C11.641,1.125 8.735,0 6.86,0 4.61,0 3.047,1.266 2.375,2.516L2.313,2.516 2.172,0.313 0,0.313C0.078,1.422,0.11,2.547,0.11,3.969L0.11,13.86" Fill="Black" Height="13.859" Canvas.Left="27.973" Canvas.Top="27.332" Width="11.641"/>
+                <Path Data="F1M0,13.188C0.953,13.75 2.312,14.141 3.796,14.141 6.968,14.141 8.843,12.453 8.843,10.047 8.843,8.031 7.609,6.86 5.281,5.985 3.515,5.297 2.734,4.781 2.734,3.672 2.734,2.656 3.515,1.813 4.984,1.813 6.234,1.813 7.218,2.297 7.75,2.61L8.343,0.844C7.609,0.36 6.406,0 5.031,0 2.156,0 0.359,1.797 0.359,3.969 0.359,5.578 1.5,6.922 3.968,7.813 5.765,8.485 6.468,9.094 6.468,10.281 6.468,11.422 5.625,12.297 3.859,12.297 2.625,12.297 1.343,11.781 0.578,11.344L0,13.188" Fill="Black" Height="14.141" Canvas.Left="43.251" Canvas.Top="27.332" Width="8.844"/>
+                <Path Data="F1M6.532,14.172C9.75,14.172 13.25,11.985 13.25,6.938 13.25,2.828 10.61,0 6.719,0 3,0 0,2.656 0,7.203 0,11.485 2.86,14.172 6.5,14.172L6.532,14.172 M6.579,12.313C4.204,12.313 2.516,10.078 2.516,7.11 2.516,4.531 3.782,1.844 6.672,1.844 9.579,1.844 10.719,4.735 10.719,7.031 10.719,10.11 8.969,12.313 6.61,12.313L6.579,12.313" Fill="Black" Height="14.172" Canvas.Left="54.668" Canvas.Top="27.332" Width="13.25"/>
+                <Path Data="F1M0.11,13.86L2.578,13.86 2.578,6.61C2.578,6.219 2.594,5.828 2.657,5.453 2.985,3.641 4.219,2.328 5.953,2.328 6.297,2.328 6.547,2.344 6.797,2.375L6.797,0.063C6.578,0.031 6.375,0 6.125,0 4.469,0 2.969,1.141 2.344,2.969L2.266,2.969 2.157,0.313 0,0.313C0.078,1.563,0.11,2.938,0.11,4.531L0.11,13.86" Fill="Black" Height="13.859" Canvas.Left="71.459" Canvas.Top="27.332" Width="6.797"/>
+                <Path Data="F1M0,13.188C0.953,13.75 2.312,14.141 3.797,14.141 6.969,14.141 8.844,12.453 8.844,10.047 8.844,8.031 7.609,6.86 5.281,5.985 3.515,5.297 2.734,4.781 2.734,3.672 2.734,2.656 3.515,1.813 4.984,1.813 6.234,1.813 7.219,2.297 7.75,2.61L8.344,0.844C7.609,0.36 6.406,0 5.031,0 2.156,0 0.359,1.797 0.359,3.969 0.359,5.578 1.5,6.922 3.969,7.813 5.765,8.485 6.469,9.094 6.469,10.281 6.469,11.422 5.625,12.297 3.859,12.297 2.625,12.297 1.344,11.781 0.578,11.344L0,13.188" Fill="Black" Height="14.141" Canvas.Left="80.127" Canvas.Top="27.332" Width="8.844"/>
+
+
+
+            </Canvas>
+           -->
+
+
+            <TextBlock Text="Temperature" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="28.99px" Canvas.Left="19.046" Canvas.Top="8.246" />
+            <TextBlock Text="sensors" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="28.99px" Canvas.Left="19.046" Canvas.Top="29.666" />
+            <TextBlock Text="t °C" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="28.99px" Canvas.Left="205.723" Canvas.Top="8.246" />
+            <Path Data="F1M0,91.834C0,142.552 41.115,183.667 91.833,183.667 142.552,183.667 183.666,142.552 183.666,91.834 183.666,41.116 142.552,0 91.833,0 41.115,0 0,41.116 0,91.834" Height="183.667" Canvas.Left="39.746" Canvas.Top="79.151" Width="183.666">
+                <Path.Fill>
+                    <LinearGradientBrush EndPoint="0.002,0.5" StartPoint="1.48,0.5">
+                        <GradientStop Color="#FFFF97FF" Offset="0"/>
+                        <GradientStop Color="#FFCDD3F6" Offset="0.27"/>
+                        <GradientStop Color="#FF82FFEC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+
+            <Path Data="M0.5,0L0.5,183.5" Height="183.5" Canvas.Left="131" Stroke="#FF4B7ABC" Canvas.Top="79.2" Width="1"/>
+            <Path Data="M0.483,0.13L47.847,176.894" Height="177.023" Canvas.Left="107.414" Stroke="#FF4B7ABC" Canvas.Top="82.473" Width="48.33"/>
+            <Path Data="M0.433,0.25L91.933,158.733" Height="158.983" Canvas.Left="85.396" Stroke="#FF4B7ABC" Canvas.Top="91.494" Width="92.366"/>
+            <Path Data="M0.354,0.354L129.755,129.755" Height="130.108" Canvas.Left="66.525" Stroke="#FF4B7ABC" Canvas.Top="105.931" Width="130.108"/>
+            <Path Data="M0.25,0.433L158.733,91.933" Height="92.366" Canvas.Left="52.088" Stroke="#FF4B7ABC" Canvas.Top="124.802" Width="158.983"/>
+            <Path Data="M0.129,0.483L176.893,47.847" Height="48.33" Canvas.Left="43.068" Stroke="#FF4B7ABC" Canvas.Top="146.82" Width="177.023"/>
+            <Path Data="M0,0.5L183.7,0.5" Height="1" Canvas.Left="39.7" Stroke="#FF4B7ABC" Canvas.Top="170" Width="183.7"/>
+            <Path Data="M0.129,47.847L176.893,0.483" Height="48.33" Canvas.Left="43.068" Stroke="#FF4B7ABC" Canvas.Top="146.82" Width="177.023"/>
+            <Path Data="M0.25,91.933L158.733,0.433" Height="92.366" Canvas.Left="52.088" Stroke="#FF4B7ABC" Canvas.Top="124.802" Width="158.983"/>
+            <Path Data="M0.354,129.754L129.755,0.353" Height="130.108" Canvas.Left="66.525" Stroke="#FF4B7ABC" Canvas.Top="105.931" Width="130.108"/>
+            <Path Data="M0.433,158.733L91.933,0.25" Height="158.983" Canvas.Left="85.396" Stroke="#FF4B7ABC" Canvas.Top="91.493" Width="92.366"/>
+            <Path Data="M0.483,176.893L47.847,0.129" Height="177.023" Canvas.Left="107.414" Stroke="#FF4B7ABC" Canvas.Top="82.474" Width="48.33"/>
+
+            <Path Data="F1M0,90.126C0,139.901 40.351,180.251 90.125,180.251 139.9,180.251 180.25,139.901 180.25,90.126 180.25,40.351 139.9,0 90.125,0 40.351,0 0,40.351 0,90.126" Height="180.251" Canvas.Left="41.454" Canvas.Top="80.859" Width="180.25">
+                <Path.Fill>
+                    <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusY="0.5" RadiusX="0.5">
+                        <GradientStop Color="#FF82FFEC" Offset="0"/>
+                        <GradientStop Color="#FF93F8EE" Offset="0.61"/>
+                        <GradientStop Color="#FFB0E9F1" Offset="0.77"/>
+                        <GradientStop Color="#FFCFD2F6" Offset="0.877"/>
+                        <GradientStop Color="#FFEEB1FC" Offset="0.96"/>
+                        <GradientStop Color="#FFFF97FF" Offset="1"/>
+                        <GradientStop Color="#FFFF97FF" Offset="1"/>
+                    </RadialGradientBrush>
+                </Path.Fill>
+            </Path>
+            <Path Data="F1M1.542,0.771C1.542,1.197 1.197,1.542 0.771,1.542 0.345,1.542 0,1.197 0,0.771 0,0.345 0.345,0 0.771,0 1.197,0 1.542,0.345 1.542,0.771" Fill="Black" Height="2.542" Canvas.Left="130.548" Canvas.Top="170.214" Width="2.542"/>
+
+            <TextBlock Text="24Hr GRAPH" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="19.854" Canvas.Top="80.515" />
+            <TextBlock Text="250° C MAX" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="199.5" Canvas.Top="80.515" />
+            <TextBlock Text="0" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="129.5" Canvas.Top="80.515" />
+            <TextBlock Text="18" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="42.079" Canvas.Top="166.565" />
+            <TextBlock Text="6" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="216.064" Canvas.Top="166.565" />
+            <TextBlock Text="12" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="127.61" Canvas.Top="251.05" />
+            <TextBlock Text="SENSORS," FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="19.046" Canvas.Top="241" />
+            <TextBlock Text="CURRENT t" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="19.046" Canvas.Top="250.096" />
+            <TextBlock Text="PREVIOUS" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="206" Canvas.Top="241" />
+            <TextBlock Text="DAY" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="224.419" Canvas.Top="250.4" />
+
+            <TextBlock Foreground="Red" Text="" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" />
+
+
+            <Path Data="M96.08,37.832C100.633,43.824 90.528,51.719 88.251,58.547 85.996,65.615 92.29,76.089 83.922,82.407 75.361,88.738 59.53,85.163 48.82,86.897 38.109,88.809 22.279,98.739 13.717,95.321 5.349,91.659 11.643,77.275 9.388,69.784 7.111,62.611 -2.994,55.911 1.559,46.461 6.087,37.173 18.558,32.936 23.487,25.97 28.642,18.853 31.962,4.431 36.432,1.114 40.316,-1.978 44.035,7.419 48.82,7.832 53.605,8.252 57.323,1.66 61.207,5.396 65.677,9.026 68.997,20.076 74.152,25.421 79.082,30.724 91.553,32 96.08,37.832z" Height="96.519" Canvas.Left="82.499" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashCap="Round" Stroke="#FFFF0068" StrokeDashArray="3.00000011920925" Canvas.Top="129.609" Width="97.635"/>
+            <Path Data="M105.059,62.166C101.102,75.469 84.297,80.104 79.744,88.664 75.181,97.151 74.512,122.156 69.599,124.988 65.633,126.634 60.631,106.449 54.799,105.67 48.966,104.853 43.964,112.537 39.999,107.495 35.085,103.563 34.417,93.937 29.854,89.84 25.3,85.847 8.495,89.764 4.538,88.135 0.527,86.15 17.453,74.917 20.147,68.569 23.008,61.637 11.166,56.232 19.09,47.473 27.567,37.712 45.135,38.182 54.799,33.533 64.463,28.631 82.03,4.059 90.507,4.002 98.431,5.033 86.589,31.586 89.45,39.074 92.144,46.272 109.07,48.508 105.059,62.166z" Height="128.953" Canvas.Left="76.52" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="8" Canvas.Top="96.606" Width="109.643"/>
+
+
+            <Path Data="M32,0.5L0,0.5" Height="1" Canvas.Left="206" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashCap="Round" Stroke="#FFFF0068" StrokeDashArray="3.00000011920925" Canvas.Top="236" Width="32"/>
+            <Path Data="F1M0,0L2.009,3.479 4.017,0z" Fill="#FFFF0068" Height="3.479" Canvas.Left="54.93" Canvas.Top="252" Width="4.017"/>
+
+
+
+            <Path Data="F1 M3.9,11.701 C3.9,7.393 7.393,3.9 11.701,3.9 14.587,3.9 17.034125,5.169 18.384125,7.5 L190.91538,7.546875 C193.07638,7.546875 194.806,9.347 194.806,11.5 194.806,13.667 193.1545,15.5 190.9935,15.5 L18.509125,15.5 C17.161125,17.831 14.589,19.502 11.701,19.502 7.393,19.502 3.9,16.009 3.9,11.701 M20.424,19.502 L190.948,19.502 C195.264,19.502 198.9085,15.621833 198.9085,11.321833 198.9085,7.013833 195.4235,3.520833 191.0955,3.520833 L20.472667,3.5 C18.328667,1.106 15.166,0 11.701,0 5.242,0 0,5.24 0,11.701 0,18.16 5.242,23.402 11.701,23.402 15.166,23.402 18.28,21.898 20.424,19.502" Fill="Black" Height="23.402" Canvas.Left="19.319" Canvas.Top="291.3" Width="198.908"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.85 C0,9.082 2.62,11.701 5.851,11.701 8.41,11.701 10.617125,9.891 11.410125,7.602 11.517125,7.623 11.639875,7.617625 11.753875,7.617625 L184.832,7.602 C185.912,7.602 186.832,6.672375 186.832,5.586375 186.832,4.508375 185.9605,3.63325 184.8945,3.63325 L38.271085,3.5884982 C38.157085,3.5884982 11.47025,3.61525 11.36325,3.63325 10.57025,1.34725 8.41,0 5.851,0 2.62,0 0,2.619 0,5.85" Height="11.701" Canvas.Left="25.168" Canvas.Top="297.2" Width="186.832"/>
+            <TextBlock Text="1." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.079" Canvas.Top="275.936" />
+            <TextBlock Text="CPU 01" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="57.799" Canvas.Top="275.936" />
+            <TextBlock x:Name="temp1" Text="{Binding ElementName=slider1, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.56" Canvas.Top="293.535" />
+            <Slider x:Name="slider1" Value="100" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="298.812" Height="8" Width="175" IsEnabled="False" />
+
+
+
+            <Path Data="F1 M3.9,11.701 C3.9,7.393 7.393,3.9 11.701,3.9 14.587,3.9 17.096625,5.658 18.446625,7.989 L190.91538,7.989 C193.07638,7.989 194.84767,9.836 194.84767,11.989 194.84767,14.156 193.12325,15.989 190.96225,15.989 L18.446625,16.004625 C17.098625,18.335625 14.589,19.502 11.701,19.502 7.393,19.502 3.9,16.009 3.9,11.701 M20.389333,19.989 L190.97787,19.973375 C195.29387,19.973375 198.761,16.001 198.761,11.701 198.761,7.393 195.3215,3.95775 190.9935,3.95775 L20.415375,3.989 C18.271375,1.595 15.166,0 11.701,0 5.242,0 0,5.24 0,11.701 0,18.16 5.242,23.402 11.701,23.402 15.166,23.402 18.182833,22.385 20.326833,19.989" Fill="Black" Height="23.402" Canvas.Left="19.319" Canvas.Top="335.85" Width="198.761"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.851 C0,9.082 2.62,11.701 5.851,11.701 8.41,11.701 10.585875,10.39775 11.378875,8.10775 11.485875,8.12975 11.577375,8.123375 11.691375,8.123375 L184.832,8.154625 C185.913,8.154625 186.86325,7.226 186.86325,6.139 186.86325,5.06 185.91563,4.139 184.84763,4.139 L16.722625,4.154625 C16.608625,4.154625 11.485875,4.122 11.378875,4.139 10.585875,1.854 8.41,0 5.851,0 2.62,0 0,2.619 0,5.851" Height="11.701" Canvas.Left="25.168" Canvas.Top="341.7" Width="186.863" />
+            <TextBlock Text="2." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.079" Canvas.Top="320.447" />
+            <TextBlock Text="CPU 02" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="57.799" Canvas.Top="320.447" />
+            <TextBlock x:Name="temp2" Text="{Binding ElementName=slider2, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.37" Canvas.Top="337.998" />
+            <Slider x:Name="slider2" Value="100" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="343.85" Height="8" Width="175" SmallChange="1" IsEnabled="False" />
+
+            
+            
+            <Path Data="F1 M3.9,11.701 C3.9,7.393 7.393,3.9 11.701,3.9 14.587,3.9 17.108,5.47 18.458,7.801 L190.95,7.801 C193.111,7.801 194.85288,9.599375 194.85288,11.752375 194.85288,13.919375 193.092,15.752375 190.931,15.752375 L18.39975,15.768 C17.05175,18.099 14.589,19.502 11.701,19.502 7.393,19.502 3.9,16.009 3.9,11.701 M20.535167,19.768 L190.95183,19.747167 C195.26783,19.747167 198.761,16.001 198.761,11.701 198.761,7.393 195.24337,3.783625 190.91537,3.783625 L20.39975,3.768 C18.25575,1.374 15.166,0 11.701,0 5.242,0 0,5.24 0,11.701 0,18.16 5.242,23.402 11.701,23.402 15.166,23.402 18.2245,22.164 20.3685,19.768" Fill="Black" Height="23.402" Canvas.Left="19.319" Canvas.Top="377.05" Width="198.761"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.85 C0,9.082 2.62,11.701 5.851,11.701 8.41,11.701 10.585875,10.17475 11.378875,7.88575 11.485875,7.90675 11.639875,7.917 11.753875,7.917 L184.86325,7.901375 C185.94425,7.901375 186.87887,7.003 186.87887,5.917 186.87887,4.839 185.93025,3.88575 184.86325,3.88575 L11.708,3.901 C11.594,3.901 11.485,3.91 11.378,3.928 10.585,1.642 8.41,0 5.851,0 2.62,0 0,2.619 0,5.85" Height="11.701" Canvas.Left="25.168" Canvas.Top="382.9" Width="186.879" />
+            <TextBlock Text="3." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.235" Canvas.Top="361.668" />
+            <TextBlock Text="Radiator In" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="58.049" Canvas.Top="361.668" />
+            <TextBlock x:Name="temp3" Text="{Binding ElementName=slider3, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.37" Canvas.Top="379.22" />
+            <Slider x:Name="slider3" Value="100" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="384.81" Height="8" Width="175" IsEnabled="False" />
+
+            <Path Data="F1 M3.9,11.701 C3.9,7.393 7.393,3.9 11.701,3.9 14.587,3.9 17.11225,5.569 18.46225,7.9 L190.94663,7.884375 C193.10763,7.884375 194.85288,9.747 194.85288,11.9 194.85288,14.067 193.12325,15.9 190.96225,15.9 L18.446625,15.9 C17.098625,18.231 14.589,19.502 11.701,19.502 7.393,19.502 3.9,16.009 3.9,11.701 M20.424,19.502 L190.948,19.502 C195.264,19.502 198.75913,16.2 198.75913,11.9 198.75913,7.592 195.276,3.9 190.948,3.9 L20.424,3.9 C18.28,1.506 15.166,0 11.701,0 5.242,0 0,5.24 0,11.701 0,18.16 5.242,23.402 11.701,23.402 15.166,23.402 18.28,21.898 20.424,19.502" Fill="Black" Height="23.402" Canvas.Left="19.319" Canvas.Top="416.92" Width="198.759"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.85 C0,9.081 2.62,11.7 5.851,11.7 8.41,11.7 10.57025,10.274375 11.36325,7.984375 11.47025,8.006375 11.593,8 11.707,8 L184.84763,8.03125 C185.92863,8.03125 186.87887,7.071375 186.87887,5.984375 186.87887,4.905375 185.93025,4 184.86325,4 L11.67575,4 C11.56175,4 11.439,3.998625 11.332,4.015625 10.539,1.730625 8.41,0 5.851,0 2.62,0 0,2.618 0,5.85" Height="11.7" Canvas.Left="25.168" Canvas.Top="422.82" Width="186.879" />
+            <TextBlock Text="4." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.235" Canvas.Top="401.259" />
+            <TextBlock Text="Radiator Out" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="58.049" Canvas.Top="401.259" />
+            <TextBlock x:Name="temp4" Text="{Binding ElementName=slider4, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.37" Canvas.Top="418.839" />
+            <Slider x:Name="slider4" Value="100" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="424.82" Height="8" Width="175" />
+            
+
+            <Path Data="F1 M3.9,11.701 C3.9,7.393 7.393,3.9 11.701,3.9 14.587,3.9 17.081,5.584625 18.431,7.915625 L190.91538,7.915625 C193.07638,7.915625 194.8685,9.77825 194.8685,11.93125 194.8685,14.09825 193.092,15.884375 190.931,15.884375 L18.321625,15.9 C16.973625,18.231 14.589,19.502 11.701,19.502 7.393,19.502 3.9,16.009 3.9,11.701 M20.431,19.915625 L191.00912,19.9 C195.32512,19.9 198.75912,16.215625 198.75912,11.915625 198.75912,7.607625 195.276,3.9 190.948,3.9 L20.424,3.9 C18.28,1.506 15.166,0 11.701,0 5.242,0 0,5.24 0,11.701 0,18.16 5.242,23.402 11.701,23.402 15.166,23.402 18.208875,22.32725 20.352875,19.93125" Fill="Black" Height="23.402" Canvas.Left="19.319" Canvas.Top="455.9" Width="198.759"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.851 C0,9.082 2.62,11.701 5.851,11.701 8.41,11.701 10.559833,10.393167 11.352833,8.1041667 11.459833,8.1251667 11.6085,7.99325 11.7225,7.99325 L184.80063,7.99325 C185.88163,7.99325 186.84762,7.101625 186.84762,6.015625 186.84762,4.937625 185.899,4 184.832,4 L11.707,3.9791667 C11.593,3.9791667 11.480667,3.9621667 11.373667,3.9791667 10.580667,1.6931667 8.41,0 5.851,0 2.62,0 0,2.619 0,5.851" Height="11.701" Canvas.Left="25.168" Canvas.Top="461.85" Width="186.848" />
+            <TextBlock Text="5." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.235" Canvas.Top="440.058" />
+            <TextBlock Text="GPU" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="58.049" Canvas.Top="440.058" />
+            <TextBlock x:Name="temp5" Text="{Binding ElementName=slider5, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.37" Canvas.Top="457.647" />
+            <Slider x:Name="slider5" Value="100" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="463.82" Height="8" Width="175" IsEnabled="False" />
+
+
+            <Path Data="F1 M3.9,11.792722 C3.9,7.4847216 7.393,3.9917216 11.701,3.9917216 14.587,3.9917216 17.159,5.4727216 18.509,7.8037216 L190.9465,7.8193466 C193.1075,7.8193466 194.85275,9.5135966 194.85275,11.666597 194.85275,13.833597 193.12325,15.807722 190.96225,15.807722 L18.431,15.792097 C17.083,18.123097 14.589,19.593722 11.701,19.593722 7.393,19.593722 3.9,16.100722 3.9,11.792722 M20.477875,19.807722 L190.94662,19.792097 C195.26262,19.792097 198.7604,15.731981 198.7604,11.431981 198.7604,7.123981 195.2774,3.803981 190.9494,3.803981 L20.550667,3.804 C18.406667,1.41 15.28133,4.3047889E-42 11.81633,4.3047889E-42 5.3573298,4.3047889E-42 0,5.3317216 0,11.792722 0,18.251722 5.242,23.493722 11.701,23.493722 15.166,23.493722 18.240125,22.219347 20.384125,19.823347" Fill="Black" Height="23.494" Canvas.Left="19.319" Canvas.Top="496.008" Width="198.76"/>
+            <Path Fill="{StaticResource HgBrush}" Data="F1 M0,5.85 C0,9.082 2.62,11.701 5.851,11.701 8.41,11.701 10.585,10.06 11.378,7.77 11.485,7.791 11.594,7.801 11.708,7.801 L184.80062,7.796375 C185.88162,7.796375 186.80062,6.882375 186.80062,5.796375 186.80062,4.718375 185.86769,3.8276478 184.80069,3.8276478 L12.706875,3.827625 C12.592875,3.827625 11.501375,3.794 11.394375,3.812 10.601375,1.526 8.41,0 5.851,0 2.62,0 0,2.619 0,5.85" Height="11.701" Canvas.Left="25.168" Canvas.Top="502" Width="186.801" />
+            <TextBlock Text="6." FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="42.235" Canvas.Top="480.694" />
+            <TextBlock Text="NB" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="58.049" Canvas.Top="480.694" />
+            <TextBlock x:Name="temp6" Text="{Binding ElementName=slider6, Path=Value, Mode=OneWay, Converter={StaticResource dtiConv}}" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="17px" Canvas.Left="220.37" Canvas.Top="498.277" />
+            <Slider x:Name="slider6" Value="101" Minimum="0" Maximum="100" Template="{StaticResource TempSlider}" Canvas.Left="37" Canvas.Top="503.82" Height="8" Width="175" IsEnabled="False" />
+
+        </Canvas>
+    </Border>
+</UserControl>

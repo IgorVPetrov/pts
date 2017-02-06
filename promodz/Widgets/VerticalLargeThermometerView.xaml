@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="promodz.Widgets.VerticalLargeThermometerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d"
+             Background="#536A87" Height="101" Width="36"
+             MinHeight="101" MaxHeight="101" MinWidth="36" MaxWidth="36">
+    <UserControl.Resources>
+
+        <VisualBrush x:Key="ScaleBrush" Viewport="7,0,12,8" ViewportUnits="Absolute" TileMode="Tile">
+            <VisualBrush.Visual>
+                <Grid Width="12" Height="8" MinHeight="8" MinWidth="12" MaxHeight="8" MaxWidth="12" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="6"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="2"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Rectangle Grid.Row="2" Grid.Column="2" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Rectangle Grid.Row="3" Grid.Column="2" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+        <Style x:Key="SliderDecreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderIncreaseRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border >
+                            <Border.Background>
+                                <VisualBrush  Viewport="0,0,14,6" ViewportUnits="Absolute" TileMode="Tile">
+                                    <VisualBrush.Visual>
+                                        <Grid Width="12" Height="6" MinHeight="6" MinWidth="12" MaxHeight="6" MaxWidth="12" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="5"/>
+                                                <ColumnDefinition Width="5"/>
+                                                <ColumnDefinition Width="1"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="2"/>
+                                                <RowDefinition Height="1"/>
+                                                <RowDefinition Height="2"/>
+                                                <RowDefinition Height="1"/>
+                                            </Grid.RowDefinitions>
+                                            <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="4" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+                                            <Rectangle Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"   Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                            <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                            <Rectangle Grid.Row="2" Grid.Column="2" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                            <Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                        </Grid>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.Background>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+
+                        <Grid Width="14" Height="7">
+
+                            <Path Fill="Transparent"  Data="M14,6.1996254 L14,1.1996254 13,1.1996254 C6.75,5.1838898 6.125,-2.9097315 1,1.1996254 L0,1.1996254 0,6.1996254 z"  Margin="0,0.8,0,0"   />
+
+                            <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}" Data="M0,0 L14,0 14,2 13,2 C6.5,5.875 5.9166667,-2.0416667 1,2 L0,2 z" Height="3.101" VerticalAlignment="Top" />
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="VericalLargeThermometerVievSliderTemplate" TargetType="{x:Type Slider}">
+            <Grid >
+                <TickBar 
+                        Name="TopTick"
+                        SnapsToDevicePixels="True" 
+                        Placement="Top"
+                        Fill="Black"
+                        Height="4"
+                        Visibility="Collapsed" />
+
+                <Track  Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderDecreaseRepeatButtonStyle}"
+                                Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumbStyle}" />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton 
+                                Style="{StaticResource SliderIncreaseRepeatButtonStyle}"
+                                Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <TickBar 
+                        Name="BottomTick"
+                        SnapsToDevicePixels="True" 
+                        Fill="{TemplateBinding Foreground}"
+                        Placement="Bottom"
+                        Height="4"
+                        Visibility="Collapsed" />
+            </Grid>
+            <ControlTemplate.Triggers>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Canvas>
+        <Path SnapsToDevicePixels="True" Fill="Black" Data="M29.108652,68.375 L29.123775,8.09375 C29.123775,3.08375 25.122524,0 19.092524,0 L17.155024,0 C11.055024,0 7.0768979,3.165625 7.0768979,8.015625 L7.0927328,68.40625 A18.12,18.12,0,1,0,29.108652,68.375 z M18.093001,98.916667 A16.38,16.38,0,0,1,9.1237739,69.28125 L9.1393982,8 C9.1393982,3.24 13.193774,1.9375 17.123774,1.9375 L19.061273,1.9375 C20.961273,1.9375 27.108149,2.119375 27.108149,8.109375 L27.093001,69.265625 A16.37,16.37,0,0,1,18.093001,98.916667 z" Height="100.904"  Width="36.242" Canvas.Left="-0.093" />
+        <Path  SnapsToDevicePixels="True" Data="M19,64.390991 L18.998366,1.2161096 C12.638366,5.2161096 12.183991,-2.9581892 7.0139909,1.2318108 L7.0560424,64.356053 A13,13,0,1,0,19.013897,64.390991 z M18.503897,77.700991 A3.27,3.27,0,1,1,21.773897,74.420991 A3.28,3.28,0,0,1,18.493897,77.700991 z" Height="88.917" Canvas.Left="4.986" Canvas.Top="6.8" Width="26.003">
+
+            <Path.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#ff98ff" Offset="0.0" />
+                    <GradientStop Color="#d9b8f9" Offset="0.2" />
+                    <GradientStop Color="#b3d6f4" Offset="0.44" />
+                    <GradientStop Color="#98edf0" Offset="0.66" />
+                    <GradientStop Color="#88faee" Offset="0.85" />
+                    <GradientStop Color="#82ffed" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+
+        </Path>
+        <Slider x:Name="slider" Height="66" Canvas.Left="11" Canvas.Top="6" Width="14" Template="{DynamicResource VericalLargeThermometerVievSliderTemplate}" Value="68" Orientation="Vertical" Maximum="100" SmallChange="1" />
+        <!--
+        <Grid Width="12" Height="8" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="6"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="2"/>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.Row="0" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Rectangle Grid.Row="2" Grid.Column="2" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+        <Path Fill="Black" Data="M0,2h12v-2h-12z" Height="2.00" Canvas.Left="12" Canvas.Top="7.984" Width="12" Stretch="Fill" />
+        -->
+    </Canvas>
+</UserControl>

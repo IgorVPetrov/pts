@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="promodz.Widgets.LedControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="57" d:DesignWidth="500"
+             MaxWidth="500" MaxHeight="57" MinWidth="500" MinHeight="57"
+             Background="#536A87" >
+    <Canvas>
+        <!--
+        <Path  Data="M28,4A23,23,0,1,0,28,52h444a23,23,0,1,0,0,-48z" >
+            <Path.Fill>
+                <LinearGradientBrush x:Name="PalitreBrush" StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#00ffde" Offset="0.0" />
+                    <GradientStop Color="#3636ff" Offset="0.2" />
+                    <GradientStop Color="#e91388" Offset="0.4" />
+                    <GradientStop Color="#eb2d2e" Offset="0.6" />
+                    <GradientStop Color="#fde92b" Offset="0.8" />
+                    <GradientStop Color="#009e54" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <Path Fill="Black" Data="M28,0A28,28,0,1,0,28,56h444a28,28,0,1,0,0,-56Z M28,8A19,19,0,1,0,28,48h444a19,19,0,1,0,0,-40" />
+        -->
+        <Path  Data="M28.5,4A23.5,23.5,0,1,0,28.5,53h443a23.5,23.5,0,1,0,0,-49z" >
+            <Path.Fill>
+                <LinearGradientBrush x:Name="PalitreBrush" StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#00ffde" Offset="0.0" />
+                    <GradientStop Color="#3636ff" Offset="0.2" />
+                    <GradientStop Color="#e91388" Offset="0.4" />
+                    <GradientStop Color="#eb2d2e" Offset="0.6" />
+                    <GradientStop Color="#fde92b" Offset="0.8" />
+                    <GradientStop Color="#009e54" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <Path Fill="Black" Data="M28.5,0A28.5,28.5,0,1,0,28.5,57h443a28.5,28.5,0,1,0,0,-57Z M28.5,8A19.5,19.5,0,1,0,28.5,49h443a19.5,19.5,0,1,0,0,-41" />
+        <Canvas x:Name="slider" Height="21" Width="492" Margin="4,18,4,18" >
+            <Canvas x:Name="leftStopper" Background="Transparent" Height="21" Width="5"/>
+            <Canvas x:Name="leftCorner" VerticalAlignment="Stretch" Width="4" Height="22">
+                <Path Fill="Transparent">
+                    <Path.Data>
+                        <EllipseGeometry  Center="2,11" RadiusX="3" RadiusY="3" />
+                    </Path.Data>
+                </Path>
+                
+            </Canvas>
+            <Canvas x:Name="rightCorner">
+
+            </Canvas>
+            <Canvas x:Name="thumb">
+
+            </Canvas>
+
+        </Canvas>
+
+    </Canvas>
+</UserControl>

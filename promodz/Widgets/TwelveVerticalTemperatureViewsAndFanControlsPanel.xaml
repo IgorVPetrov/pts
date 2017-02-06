@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="promodz.Widgets.TwelveVerticalTemperatureViewsAndFanControlsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="134" d:DesignWidth="536"
+             MaxWidth="536" MaxHeight="134" MinWidth="536" MinHeight="134"
+             Background="#536A87">
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="19"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="41"/>
+                <ColumnDefinition Width="19"/>
+            </Grid.ColumnDefinitions>
+            <local:VerticalThermometerViev x:Name="therm1"  Grid.Column="1" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalThermometerViev x:Name="therm2" Grid.Column="2" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalThermometerViev x:Name="therm3" Grid.Column="3" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalThermometerViev x:Name="therm4" Grid.Column="4" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalThermometerViev x:Name="therm5" Grid.Column="5" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalThermometerViev x:Name="therm6"  Grid.Column="6" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan1" Grid.Column="7" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan2" Grid.Column="8" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan3" Grid.Column="9" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan4" Grid.Column="10" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan5" Grid.Column="11" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:VerticalFanControl x:Name="fan6" Grid.Column="12" Margin="1,0,0,0" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Right" Margin="0,2.25,-0.5,0" TextWrapping="Wrap" Text="t" Height="16.219" VerticalAlignment="Top" FontFamily="../Fonts/#Myriad Pro" FontWeight="Bold" FontSize="17" />
+            <TextBlock x:Name="textBlock1"  TextWrapping="Wrap" Text="N" VerticalAlignment="Bottom" FontFamily="../Fonts/#Myriad Pro" FontWeight="Bold" FontSize="17" Margin="-5.2,0,0,2.5" Grid.Column="1" HorizontalAlignment="Left" Width="19" />
+
+        </Grid>
+    </Border>
+</UserControl>

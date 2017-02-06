@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="promodz.Widgets.PumpSpeed"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="134" d:DesignWidth="134"
+             MinHeight="134" MaxHeight="134" MinWidth="134" MaxWidth="134"
+             Padding="0" Background="#536A87" 
+             SnapsToDevicePixels="True">
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Canvas  >
+
+
+            <TextBlock x:Name="Speed" Text="8888" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" Canvas.Top="40.25" FontFamily="Myriad Pro"  FontSize="46" Width="128" Height="42.75"  />
+            <TextBlock x:Name="Number" Canvas.Right="11" TextAlignment="Right" TextWrapping="Wrap" Text="04" Canvas.Top="88.703" FontFamily="../Fonts/#Myriad Pro" FontSize="32" Height="29.817"/>
+            <Path Fill="Black" Data="M17.26,20.46l-1.66-7.38,4.75,1.81v2H18.78a1.85,1.85,0,0,0,0,.27,1.86,1.86,0,1,0,3.71-.27H20.92V15.12l.66.25.73-2-1.87-2.1L7.9,6.5,8.21,1,5.56,0,.65,13l1.09.41v2H.65v3.64H1.74V17.16h.69v1.91H3.52V15.42H2.43V13.66l.85.32L6.69,9.68l4.48,1.71v9.07H0v1.63H22.66V20.46h-5.4Zm-4.7,0V11.92h0l1.5.57,1.8,8Z" Canvas.Left="13" Canvas.Top="95.91" />
+            <TextBlock x:Name="textBlock" Canvas.Left="12" TextWrapping="Wrap" Text="v" Canvas.Top="5.666" FontFamily="../Fonts/#Myriad Pro" FontSize="29"/>
+            <TextBlock x:Name="textBlock1" Canvas.Left="63" TextWrapping="Wrap" Text="LPM" Canvas.Top="5.666" FontSize="29" FontFamily="/promodz;component/Fonts/#Myriad Pro"/>
+
+        </Canvas>
+    </Border>
+</UserControl>

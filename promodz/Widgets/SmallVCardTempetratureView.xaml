@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="promodz.Widgets.SmallVCardTempetratureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+              d:DesignHeight="134" d:DesignWidth="134"
+             MinHeight="134" MaxHeight="134" MinWidth="134" MaxWidth="134"
+             Padding="0" Background="#536A87" 
+             SnapsToDevicePixels="True">
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Canvas>
+            <Canvas Width="30" Height="30" Canvas.Left="12.3" Canvas.Bottom="3.5">
+                <Path Fill="Black" Data="M9.07,24.46H26.58c.38,0,.68-1.25.74-2h-19C8.39,23.21,8.69,24.46,9.07,24.46Z"/>
+                <Path Fill="Black" Data="M30,24.46h8c.38,0,.69-1.25.74-2H29.27C29.33,23.21,29.63,24.46,30,24.46Z"/>
+                <Path Fill="Black" Data="M5.2,2.82V.7A.7.7,0,0,0,4.5,0H.7a.7.7,0,0,0,0,1.4H3.81V6.08H.7V7.17H3.81V8.53H.7v7.61H3.81V17.5H.7v1.09H3.81v5.17a.7.7,0,1,0,1.4,0v-1.9H42.57v-19Z"/>
+            </Canvas>
+            <TextBlock x:Name="Number" Canvas.Right="13" TextWrapping="Wrap" Text="03" Canvas.Bottom="0.5" FontFamily="../Fonts/#Myriad Pro" FontSize="32"/>
+            <TextBlock x:Name="Temperature" TextAlignment="Center" TextWrapping="Wrap" Text="888" Canvas.Top="28.5" Width="128" Height="59.1" FontFamily="../Fonts/#Myriad Pro" FontWeight="Bold" FontSize="62"/>
+            <TextBlock x:Name="textBlock" Canvas.Left="10.3" TextWrapping="Wrap" Text="t" Canvas.Top="6" FontFamily="../Fonts/#Myriad Pro" FontSize="29"/>
+            <TextBlock x:Name="textBlock1" Canvas.Left="85.289" TextWrapping="Wrap" Text="°C" Canvas.Top="6.3" FontFamily="../Fonts/#Myriad Pro" FontSize="29"/>
+
+
+        </Canvas>
+    </Border>
+</UserControl>

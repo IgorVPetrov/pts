@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="promodz.Widgets.Graph24Radial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="268" d:DesignWidth="268"
+             Width="268" Height="268"
+             MinHeight="268" MaxHeight="268" MinWidth="268" MaxWidth="268"
+             Padding="0"
+             Background="#536A87">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="linear_gradient" StartPoint="1,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+
+                <GradientStop Offset="0" Color="#ff98ff"/>
+                <GradientStop Offset="0.2" Color="#d9b8f9"/>
+                <GradientStop Offset="0.44" Color="#b3d6f4"/>
+                <GradientStop Offset="0.66" Color="#98edf0"/>
+                <GradientStop Offset="0.85" Color="#88faee"/>
+                <GradientStop Offset="1" Color="#82ffed"/>
+
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <RadialGradientBrush x:Key="radial_gradient" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5" >
+            <RadialGradientBrush.GradientStops>
+                <GradientStop Offset="0" Color="#82ffed"/>
+                <GradientStop Offset="0.22" Color="#85fced"/>
+                <GradientStop Offset="0.39" Color="#8ff4ef"/>
+                <GradientStop Offset="0.55" Color="#a0e6f1"/>
+                <GradientStop Offset="0.71" Color="#b8d3f5"/>
+                <GradientStop Offset="0.85" Color="#d7b9f9"/>
+                <GradientStop Offset="0.99" Color="#fc9bff"/>
+                <GradientStop Offset="1" Color="#ff98ff"/>
+
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+    </UserControl.Resources>
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Canvas >
+            
+            <Canvas Height="262"  Width="262">
+                <Path Data="F1M0,91.833C0,142.552 41.115,183.667 91.833,183.667 142.552,183.667 183.666,142.552 183.666,91.833 183.666,41.116 142.552,0 91.833,0 41.115,0 0,41.116 0,91.833" Height="183.667" Canvas.Left="35.746" Canvas.Top="65.514" Width="183.666">
+                    <Path.Fill>
+                        <LinearGradientBrush EndPoint="0.002,0.5" StartPoint="1.48,0.5">
+                            <GradientStop Color="#FFFF97FF" Offset="0"/>
+                            <GradientStop Color="#FFCDD3F6" Offset="0.27"/>
+                            <GradientStop Color="#FF82FFEC" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+
+                <Path Data="M0.5,0L0.5,183.5" Height="183.5" Canvas.Left="127" Stroke="#FF4B7ABC" Canvas.Top="65.5" Width="1"/>
+                <Path Data="M0.483,0.129L47.847,176.893" Height="177.023" Canvas.Left="103.414" Stroke="#FF4B7ABC" Canvas.Top="68.836" Width="48.33"/>
+                <Path Data="M0.433,0.25L91.933,158.733" Height="158.983" Canvas.Left="81.396" Stroke="#FF4B7ABC" Canvas.Top="77.856" Width="92.366"/>
+                <Path Data="M0.354,0.353L129.755,129.754" Height="130.108" Canvas.Left="62.525" Stroke="#FF4B7ABC" Canvas.Top="92.294" Width="130.108"/>
+                <Path Data="M0.25,0.434L158.733,91.934" Height="92.366" Canvas.Left="48.088" Stroke="#FF4B7ABC" Canvas.Top="111.164" Width="158.983"/>
+                <Path Data="M0.129,0.483L176.893,47.847" Height="48.33" Canvas.Left="39.068" Stroke="#FF4B7ABC" Canvas.Top="133.183" Width="177.023"/>
+                <Path Data="M0,0.5L184,0.5" Height="1" Canvas.Left="35.6" Stroke="#FF4B7ABC" Canvas.Top="156" Width="183.8"/>
+                <Path Data="M0.129,47.847L176.893,0.483" Height="48.33" Canvas.Left="39.068" Stroke="#FF4B7ABC" Canvas.Top="133.182" Width="177.023"/>
+                <Path Data="M0.25,91.934L158.733,0.433" Height="92.366" Canvas.Left="48.088" Stroke="#FF4B7ABC" Canvas.Top="111.164" Width="158.983"/>
+                <Path Data="M0.354,129.755L129.755,0.354" Height="130.108" Canvas.Left="62.525" Stroke="#FF4B7ABC" Canvas.Top="92.293" Width="130.108"/>
+                <Path Data="M0.433,158.733L91.933,0.25" Height="158.983" Canvas.Left="81.396" Stroke="#FF4B7ABC" Canvas.Top="77.856" Width="92.366"/>
+                <Path Data="M0.483,176.894L47.847,0.13" Height="177.023" Canvas.Left="103.414" Stroke="#FF4B7ABC" Canvas.Top="68.836" Width="48.33"/>
+
+                <Path Data="F1M0,90.125C0,139.9 40.351,180.25 90.125,180.25 139.9,180.25 180.25,139.9 180.25,90.125 180.25,40.351 139.9,0 90.125,0 40.351,0 0,40.351 0,90.125" Height="180.25" Canvas.Left="37.454" Canvas.Top="67.222" Width="180.25">
+                    <Path.Fill>
+                        <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusY="0.5" RadiusX="0.5">
+                            <GradientStop Color="#FF82FFEC" Offset="0"/>
+                            <GradientStop Color="#FF93F8EE" Offset="0.61"/>
+                            <GradientStop Color="#FFB0E9F1" Offset="0.77"/>
+                            <GradientStop Color="#FFCFD2F6" Offset="0.877"/>
+                            <GradientStop Color="#FFEEB1FC" Offset="0.96"/>
+                            <GradientStop Color="#FFFF97FF" Offset="1"/>
+                            <GradientStop Color="#FFFF97FF" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <TextBlock  Text="t °C" Canvas.Top="14" Canvas.Left="202" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="28.99px"/>
+                <TextBlock  Text="Overall daily" Canvas.Top="14.4" Canvas.Left="14.8" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="28.99px"/>
+                <TextBlock  Text="24Hr GRAPH" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="15.799" Canvas.Top="66.888"/>
+                <TextBlock  Text="SYSTEM" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="15.799" Canvas.Top="236.404"/>
+                <TextBlock  Text="AVERAGE" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="15.799" Canvas.Top="245.501"/>
+                <TextBlock  Text="PREVIOUS" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="211.715" Canvas.Top="227.307"/>
+                <TextBlock  Text="DAY" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="230.441" Canvas.Top="236.404"/>
+                <TextBlock  Text="250° C MAX" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="206.955" Canvas.Top="66.888"/>
+                <Path Data="M32,0.5L0,0.5" Height="1" Canvas.Left="212" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashCap="Round" Stroke="#FFFF0068" StrokeDashArray="3.00000011920925" Canvas.Top="222" Width="32"/>
+                <TextBlock Text="0" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="125.536" Canvas.Top="67.091"/>
+                <TextBlock Text="6" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="211.859" Canvas.Top="152.921"/>
+                <TextBlock Text="12" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="123.548" Canvas.Top="237.478"/>
+                <TextBlock Text="18" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontSize="7.58px" Canvas.Left="38.042" Canvas.Top="152.921"/>
+                <Path Data="F1M1.542,0.772C1.542,1.198 1.197,1.543 0.771,1.543 0.345,1.543 0,1.198 0,0.772 0,0.346 0.345,0.001 0.771,0.001 1.197,0.001 1.542,0.346 1.542,0.772" Fill="Black" Height="1.542" Canvas.Left="126.548" Canvas.Top="156.576" Width="1.542"/>
+                <Path x:Name="previousdayGraph" Data="M96.08,37.833C100.633,43.825 90.528,51.72 88.251,58.548 85.996,65.616 92.29,76.09 83.922,82.407 75.361,88.739 59.53,85.164 48.82,86.898 38.109,88.81 22.279,98.74 13.717,95.322 5.349,91.66 11.643,77.276 9.388,69.785 7.111,62.612 -2.994,55.912 1.559,46.462 6.087,37.174 18.558,32.937 23.487,25.971 28.642,18.854 31.962,4.432 36.432,1.115 40.316,-1.977 44.035,7.42 48.82,7.833 53.604,8.253 57.323,1.661 61.207,5.397 65.677,9.027 68.997,20.077 74.152,25.422 79.082,30.725 91.553,32.001 96.08,37.833z" Height="96.519" Canvas.Left="78.499" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashCap="Round" Stroke="#FFFF0068" StrokeDashArray="3.00000011920925" Canvas.Top="115.971" Width="97.635"/>
+                <Path x:Name="currentdayGraph" Data="M105.058,62.166C101.101,75.469 84.296,80.104 79.743,88.664 75.18,97.151 74.511,122.156 69.598,124.988 65.632,126.635 60.629,106.449 54.798,105.67 48.965,104.853 43.963,112.537 39.998,107.495 35.084,103.563 34.416,93.937 29.853,89.84 25.299,85.847 8.494,89.763 4.537,88.135 0.527,86.15 17.452,74.917 20.146,68.569 23.007,61.636 11.165,56.232 19.089,47.473 27.566,37.712 45.133,38.183 54.798,33.533 64.461,28.631 82.029,4.059 90.506,4.002 98.431,5.033 86.588,31.586 89.449,39.074 92.143,46.271 109.069,48.508 105.058,62.166z" Height="128.953" Canvas.Left="72.521" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="8" Canvas.Top="82.968" Width="109.642"/>
+            </Canvas>
+
+
+        </Canvas>
+    </Border>
+</UserControl>

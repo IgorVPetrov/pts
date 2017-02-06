@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="promodz.Widgets.SixThermometerViewsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:promodz.Widgets"
+             mc:Ignorable="d" 
+             d:DesignHeight="268" d:DesignWidth="268"
+             MinHeight="268" MaxHeight="268" MinWidth="268" MaxWidth="268"
+             Padding="0" Background="#536A87" 
+             SnapsToDevicePixels="True">
+    <Border BorderBrush="#2C394F" BorderThickness="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="14*"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <local:ThermometerView x:Name="therm1" Margin="2,0,0,0"  Grid.Row="1" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:ThermometerView x:Name="therm2" Margin="2,0,0,0"  Grid.Row="2" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:ThermometerView x:Name="therm3" Margin="2,0,0,0"  Grid.Row="3" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:ThermometerView x:Name="therm4" Margin="2,0,0,0"  Grid.Row="4" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:ThermometerView x:Name="therm5" Margin="2,0,0,0"  Grid.Row="5" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+            <local:ThermometerView x:Name="therm6" Margin="2,0,0,0"  Grid.Row="6" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}} , Path=Background}"/>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -100,8 +100,50 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
 
+            <Style x:Key="ContextMenuStyle" TargetType="{x:Type ContextMenu}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+                <Setter Property="HasDropShadow" Value="True"/>
+                <Setter Property="Background" Value="#FF3E5C81"/>
+                <Setter Property="Height" Value="110"/>
+                <Setter Property="Width" Value="110"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContextMenu}">
+                            <Border Name="Border" Background="{TemplateBinding Background}"  BorderThickness="0" >
+                                <StackPanel>
+                                    <Canvas Width="Auto" Height="26">
+                                        <TextBlock Text="Preferences" FontFamily="/promodz;component/Fonts/#Myriad Pro" FontWeight="Bold" FontSize="17" Foreground="#fcb912" Canvas.Left="10.5" Canvas.Top="2.75">
+                                            <TextBlock.LayoutTransform>
+                                                <ScaleTransform ScaleX="1.017"/>
+                                            </TextBlock.LayoutTransform>
+                                        </TextBlock>
+                                    </Canvas>
+                                    <StackPanel Margin="0,0,0,0" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasDropShadow" Value="true">
+                                    <Setter TargetName="Border" Property="Padding" Value="0,3,0,3"/>
+                                    <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu  Name="cm" Style="{StaticResource ContextMenuStyle}">
+            <MenuItem Header="Shape / Layout"/>
+            <MenuItem Header="Tile feats"/>
+            <MenuItem Header="Color scheme"/>
+            <MenuItem Header="Remove" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Canvas x:Name="MainCanvas"   >
         <Path  Fill="Black" Data="M227.55,14.4H43.11C39.95,5.4,31.81,0,22.26,0a22.34,22.34,0,0,0,0,44.69A22.77,22.77,0,0,0,43.11,30.4H227.55a8,8,0,0,0,0-16Zm0,12H40.41c-.29,1-.75,2.1-1.32,4.1A19,19,0,0,1,22.26,41.07a18.61,18.61,0,0,1,0-37.23A19.09,19.09,0,0,1,39.09,14.49a9.51,9.51,0,0,1,1.32,3.9H227.55a4,4,0,0,1,0,8Z" Canvas.Top="0.593" />
         <Path   Data="M227.86,20.4H38.2A15.51,15.51,0,0,0,22.59,6.65a15.75,15.75,0,0,0,0,31.51A15.53,15.53,0,0,0,38.2,24.4H227.86a2,2,0,0,0,0-4Z" Canvas.Top="0.593" Canvas.Left="-0.002" >
@@ -142,7 +184,7 @@
         </Path>
         <TextBlock x:Name="Speed" Canvas.Right="30" TextWrapping="Wrap" Text="" Canvas.Top="31.646" HorizontalAlignment="Right" FontFamily="../Fonts/#Myriad Pro" FontSize="14"  />
         <TextBlock x:Name="textBlock" Canvas.Left="209.93" TextWrapping="Wrap" Text="RPM" Canvas.Top="31.646" FontFamily="../Fonts/#Myriad Pro" FontSize="14" Height="13.044" />
-        <Slider x:Name="slider"  Template="{StaticResource FanSlider}" Canvas.Left="40" Canvas.Top="20" Width="190" Height="6" SmallChange="1" ValueChanged="slider_ValueChanged" Maximum="4000" />
+        <Slider x:Name="slider"  Template="{StaticResource FanSlider}" Canvas.Left="40" Canvas.Top="20" Width="190" Height="6" SmallChange="1" ValueChanged="Slider_ValueChanged" Maximum="4000" />
         <TextBlock x:Name="SystemName" Canvas.Left="44.5" TextWrapping="Wrap" Text="FAN 01:" FontFamily="../Fonts/#Myriad Pro" FontSize="14" Canvas.Top="-2.5"/>
         <TextBlock x:Name="UserName" Canvas.Left="94" TextWrapping="Wrap" Text="CHASSIS" Canvas.Top="-2.5" FontFamily="../Fonts/#Myriad Pro Light" FontSize="14"/>
         

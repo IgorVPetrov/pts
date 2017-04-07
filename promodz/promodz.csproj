@@ -85,6 +85,9 @@
     <Compile Include="Widgets\Converters\DoubleToIntStrConverter.cs" />
     <Compile Include="Widgets\Converters\LedRegulatotHorizontaleColorConverter.cs" />
     <Compile Include="Widgets\Converters\NormalizeConverter.cs" />
+    <Compile Include="Widgets\CustMenu.xaml.cs">
+      <DependentUpon>CustMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Widgets\FanControl.xaml.cs">
       <DependentUpon>FanControl.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
     <Compile Include="Widgets\VerticalThermometerViev.xaml.cs">
       <DependentUpon>VerticalThermometerViev.xaml</DependentUpon>
     </Compile>
+    <Page Include="Widgets\CustMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Widgets\FanControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -317,10 +324,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\PumpSpeed.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Widgets\Resources\ContextMenuDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -458,7 +461,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Widgets\Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

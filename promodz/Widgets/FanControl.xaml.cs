@@ -26,11 +26,13 @@ namespace promodz.Widgets
 
         double maxFanSpeed = 2.5;
 
+        double oldSliderValue = 0;
+
         public FanControl()
         {
             InitializeComponent();
 
-            
+            oldSliderValue = slider.Value;
         }
         private void InitAnimation(double period)
         {
@@ -60,10 +62,19 @@ namespace promodz.Widgets
             Speed.Text = ((Int32)(slider.Value)).ToString();
             //InitAnimation(1000);
         }
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Speed.Text = ((Int32)(slider.Value)).ToString();
+
+            if (Math.Abs(slider.Value - oldSliderValue) < Math.Abs(slider.Maximum - slider.Minimum) / 20 && slider.Value != 0)
+            {
+                return;
+            }
+
+            oldSliderValue = slider.Value;
+
             double period;
+
             if (slider.Value == 0)
             {
                 period = 10000;

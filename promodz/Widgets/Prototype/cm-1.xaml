@@ -14,7 +14,7 @@
             <GradientStop Color="#DCD9D9" Offset="0.8"/>
             <GradientStop Color="White" Offset="1"/>
         </LinearGradientBrush>
-        <Style x:Key="MenuStyle1" TargetType="{x:Type Menu}">
+        <Style x:Key="ContextMenuStyle" TargetType="{x:Type Menu}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Height" Value="110"/>
             <Setter Property="Width" Value="110"/>
@@ -37,15 +37,21 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ContentMenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="FontFamily" Value="/promodz;component/Fonts/#Myriad Pro" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
         <ControlTemplate x:Key="ShapeLayoutContextMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
-            <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                <Grid VerticalAlignment="Center">
+            <Border x:Name="templateRoot"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Height="20" Width="111">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" MinWidth="10"/>
+                        <ColumnDefinition Width="Auto" MinWidth="110.867"/>
                     </Grid.ColumnDefinitions>
-                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
-                    <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Margin="3" Visibility="Collapsed" VerticalAlignment="Center"/>
+                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Stretch" Height="Auto" Margin="3,2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Stretch" Width="Auto" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+
+                    <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Margin="3,0,3,6.8" Visibility="Collapsed" VerticalAlignment="Bottom" Height="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+
                     <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                 </Grid>
             </Border>
@@ -75,6 +81,9 @@
                 </MultiTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <DataTemplate x:Key="ShapeLayoutContextMenuItemHeaderDataTemplate">
+            <Grid Height="20" Margin="-11,0,-8,0"/>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -163,8 +172,8 @@
                 <Path Data="F1M6.6,8.242L0,1.642 1.643,0 8.243,6.599z" Fill="White" Height="8.242" Canvas.Left="221.879" Canvas.Top="7.28" Width="8.243"/>
                 <Path Data="F1M8.242,1.643L1.642,8.243 0,6.6 6.599,0z" Fill="White" Height="8.243" Canvas.Left="221.879" Canvas.Top="7.279" Width="8.242"/>
             </Canvas>
-            <Menu x:Name="menu" Height="110.084" Background="Transparent" Canvas.Top="21.999" Width="110.958" Style="{DynamicResource MenuStyle1}">
-                <MenuItem Header="Shape / Layout" Template="{DynamicResource ShapeLayoutContextMenuItemControlTemplate}"/>
+            <Menu x:Name="menu" Height="110.084" Background="Transparent" Canvas.Top="21.999" Width="110.958" Style="{DynamicResource ContextMenuStyle}">
+                <MenuItem Header="Shape / Layout" Style="{DynamicResource ContentMenuItemStyle}"  Template="{DynamicResource ShapeLayoutContextMenuItemControlTemplate}" HeaderTemplate="{DynamicResource ShapeLayoutContextMenuItemHeaderDataTemplate}"/>
                 <MenuItem Header="Tile feats"/>
                 <MenuItem Header="Color scheme"/>
                 <MenuItem Header="Remove" />
